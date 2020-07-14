@@ -1,4 +1,4 @@
-# Bienvenidos a FriendlRent
+# Bienvenidos a FriendlyRent
 
 Aplicación Web para la gestión de alquileres entre inquilinos y propietarios.
 
