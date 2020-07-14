@@ -21,7 +21,7 @@ Puedes encontrar información de cómo hemos llevado a cabo este proyecto en [Wi
 
 El equipo que ha hecho posible este proyecto.
 
-* **Óscar Miras** - *Formador y project manager* - [omiras](https://omiras.github.io/)
+* **Óscar Miras** - *Formador y project manager.Escribe los requisitos en servilletas!* - [omiras](https://omiras.github.io/)
 
 
 ---
