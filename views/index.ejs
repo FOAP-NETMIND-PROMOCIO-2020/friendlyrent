@@ -36,7 +36,7 @@
           margin-bottom: 15px;
       }
   
-      .divider-text span {
+      .divider-text label {
           padding: 7px;
           font-size: 12px;
           position: relative;
@@ -105,27 +105,27 @@
                
                   <div class="form-group input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                      <label for="fullName" class="input-group-text"> <i class="fa fa-user"></i> </label>
                     </div>
-                    <input name="userName" class="form-control" placeholder="Full name" type="text">
+                    <input id="fullName" name="userName" class="form-control" placeholder="Full name" type="text">
                   </div> <!-- form-group// -->
                   <div class="form-group input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"> <i class="fas fa-address-card"></i> </span>
+                      <label for="userName" class="input-group-text"> <i class="fas fa-address-card"></i> </label>
                     </div>
-                    <input name="userCode" class="form-control" placeholder="User name" type="text">
+                    <input id="userName" name="userCode" class="form-control" placeholder="User name" type="text">
                   </div> <!-- form-group// -->
                   <div class="form-group input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                      <label for="email" class="input-group-text"> <i class="fa fa-envelope"></i> </label>
                     </div>
-                    <input name="email" class="form-control" placeholder="Email address" type="email">
+                    <input id="email" name="email" class="form-control" placeholder="Email address" type="email">
                   </div> <!-- form-group// -->
                   <div class="form-group input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                      <label for="select" class="input-group-text"> <i class="fa fa-building"></i> </label>
                     </div>
-                    <select name="identifUser" class="form-control">
+                    <select id="select" name="identifUser" class="form-control">
                       <option selected=""> what are you looking for? </option>
                       <option value="true"> I'm renting my apartment </option>
                       <option value="false">I'm looking for an apartment</option>
@@ -133,15 +133,15 @@
                   </div> <!-- form-group end.// -->
                   <div class="form-group input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                      <label for="password" class="input-group-text"> <i class="fa fa-lock"></i> </label>
                     </div>
-                    <input name="userPassword" class="form-control" placeholder="Create password" type="password">
+                    <input id="password" name="userPassword" class="form-control" placeholder="Create password" type="password">
                   </div> <!-- form-group// -->
                   <div class="form-group input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                      <label for="password2" class="input-group-text"> <i class="fa fa-lock"></i> </label>
                     </div>
-                    <input name="password" class="form-control" placeholder="Repeat password" type="password">
+                    <input id="password2" name="password" class="form-control" placeholder="Repeat password" type="password">
                   </div> <!-- form-group// -->
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
