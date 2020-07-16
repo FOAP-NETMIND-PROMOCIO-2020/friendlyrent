@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    <title>Add new apartment</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Friendly Rent</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+			  <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+			  
+	          <li class="nav-item"><a href="team.html" class="nav-link">Team</a></li>
+	          
+	          <li class="nav-item"><a href="properties.html" class="nav-link">Properties</a></li>
+	      
+	          
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+
+    
+    <p class="text-center bg-light p-5 display-4">Add new apartment</p>
+           
+        
+    <!-- contenedor form -->
+    <form method="POST" action="/new-apartment" class="container">
+        <!-- primera fila -->
+        <div class="row">
+            <div class="form-group col-sm">
+                    <label for="">Title</label>
+                    <input type="text" class="form-control d-inline" name="title" id="title" placeholder="Insert title" maxlength="30" required>    
+            </div>
+                
+            <div class="form-group col-sm">
+                <label for="">Description</label>
+                <textarea type="text" class="form-control d-inline" name="description" id="description" rmaxlength="2000" rows="4" required></textarea> 
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Terms & conditions</label>
+                <textarea type="text" class="form-control" name="terms" id="terms" maxlength="2000" rows="4" required></textarea>
+            </div>
+        </div>
+        
+        <!-- segunda fila -->
+        <div class="row">
+            
+            <div class="form-group col-sm">
+                <label for="">Rooms</label>
+                <select class="form-control" name="rooms" id="rooms" required>
+                <option>1 room</option>
+                <option>2 rooms</option>
+                <option>3 rooms</option>
+                <option>4 rooms</option>
+                <option>5+ rooms</option>
+                </select>
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Bathrooms</label>
+                <select class="form-control" name="bathrooms" id="bathrooms" required>
+                <option>1 bathroom</option>
+                <option>2 bathrooms</option>
+                <option>3 bathrooms</option>
+                <option>4 bathrooms</option>
+                <option>5+ bathrooms</option>
+                </select>
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Apartment size</label>
+                <input type="number" class="form-control" name="squareMeters" id="squareMeters" required>
+            </div>
+        </div>
+        
+        <!-- tercera fila -->
+        <div class="row">
+            
+            <!-- Location -->
+            <div class="form-group col-sm">
+                <label for="">City</label>
+                <input type="text" class="form-control" name="city" id="city" required>
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Province</label>
+                <input type="text" class="form-control" name="province" id="province" required>
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Address</label>
+                <input type="text" class="form-control" name="address" id="address" required>
+            </div>
+            
+            <!-- GPS -->
+
+            <!-- Fin de location -->
+        </div>
+       
+
+        <!-- cuarta fila -->
+
+        <div class="row">
+            <div class="form-group col-sm">
+                <label for="">Services</label>
+                <select multiple class="form-control" id="services">
+                    <% services.forEach(function(service){ %>
+                    <option name="<%= service.value %>"> <%= service.label %></option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Price</label>
+                <input type="number" class="form-control" name="price" id="price" required>
+            </div>
+       
+            <div class="form-group col-sm">
+                <label for="">Duration</label>
+                <select class="form-control" name="durationMonths" id="durationMonths" required>
+                <option>1 month</option>
+                <option>2 months</option>
+                <option>3 months</option>
+                <option>4 months</option>
+                <option>5 months</option>
+                <option>6 months</option>
+                <option>7 months</option>
+                <option>8 months</option>
+                <option>9 months</option>
+                <option>10 months</option>
+                <option>11 month</option>
+                <option>12 months</option>
+                <option>13 months</option>
+                <option>14 months</option>
+                <option>15 months</option>
+                <option>16 months</option>
+                <option>17 months</option>
+                <option>18 months</option>
+                <option>19 months</option>
+                <option>20 months</option>
+                <option>21 months</option>
+                <option>22 months</option>
+                <option>23 months</option>
+                <option>24 months</option>
+                
+                </select>
+            </div>
+        </div>
+
+         <!-- quinta fila -->
+         <div class="row">
+            <div class="form-group col-sm">
+                <label for="">Main photo title</label>
+                <input type="text" class="form-control d-inline" name="mainPhoto" id="mainPhoto" placeholder="Insert photo title" maxlength="30" required>    
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Title 2</label>
+                <input type="text" class="form-control d-inline" name="title-photo-2" id="title-photo-2" placeholder="Insert photo title" maxlength="30" required>    
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Title 3</label>
+                <input type="text" class="form-control d-inline" name="title-photo-3" id="title-photo-3" placeholder="Insert photo title" maxlength="30" required>    
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Title 4</label>
+                <input type="text" class="form-control d-inline" name="title-photo-4" id="title-photo-4" placeholder="Insert photo title" maxlength="30" required>    
+            </div>
+            
+        </div>
+
+        <!-- sexta fila -->
+        
+                <div class="row">
+            <div class="form-group col-sm">
+                <label for="">Main photo</label>
+                <input type="url" class="form-control" name="mainPhoto-url" id="mainPhoto-url" required>
+            </div>
+
+            <div class="form-group col-sm">
+                <label for="">Photo 2</label>
+                <input type="url" class="form-control" name="photo-2" id="photo-2" required>
+            </div>
+            
+            <div class="form-group col-sm">
+                <label for="">Photo 3</label>
+                <input type="url" class="form-control" name="photo-3" id="photo-3" required>
+            </div>
+            
+            <div class="form-group col-sm">
+                <label for="">Photo 4</label>
+                <input type="url" class="form-control" name="photo-4" id="photo-4" required>
+            </div>
+        </div>
+
+    <!-- button -->
+    <div class="d-flex flex-row-reverse">
+        <input class="m-3 btn btn-success py-3 px-4" type="submit">
+    </div>    
+        
+      </form>
+      <!-- fin del form -->
+
+      <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
