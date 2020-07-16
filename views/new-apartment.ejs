@@ -32,7 +32,7 @@
 	  </nav>
 
     
-          <p class="text-center bg-light p-5 display-4">Add new apartment</p>
+    <p class="text-center bg-light p-5 display-4">Add new apartment</p>
            
         
     <!-- contenedor form -->
@@ -117,11 +117,9 @@
             <div class="form-group col-sm">
                 <label for="">Services</label>
                 <select multiple class="form-control" id="services">
-                    <option name="AC">AC</option>
-                    <option name="WC">WC</option>
-                    <option name="TV">TV</option>
-                    <option name="WiFi">WiFi</option>
-                    <option name="Kitchen"> Kitchen</option>
+                    <% services.forEach(function(service){ %>
+                    <option name="<%= service.value %>"> <%= service.label %></option>
+                    <% }) %>
                 </select>
             </div>
 

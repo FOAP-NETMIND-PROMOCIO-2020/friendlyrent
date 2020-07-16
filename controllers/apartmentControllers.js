@@ -3,7 +3,30 @@ exports.getAllApartments = (req, res) => {
 }
 
 exports.getNewApartment = (req, res) => {
-    res.render('new-apartment');
+    const services = [{
+        label: "WiFi",
+        value: "wifi"
+    }, 
+    {
+        label: "TV",
+        value: "tv"
+    },
+    {
+        label: "AC",
+        value: "ac"
+    }, 
+    {
+        label: "WC",
+        value: "wc"
+    }, 
+    {
+        label: "Kitchen",
+        value: "kitchen"
+    }]
+
+    res.render('new-apartment', {
+        services: services
+    });
 }
 
 exports.postNewApartment = (req, res) => {
