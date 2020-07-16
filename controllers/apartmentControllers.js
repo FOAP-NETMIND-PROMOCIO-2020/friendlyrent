@@ -1,5 +1,7 @@
 exports.getAllApartments = (req, res) => {
-    res.render('index');
+    res.render('index', {
+        role: 'inquilino'
+    });
 }
 
 exports.getNewApartment = (req, res) => {
