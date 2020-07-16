@@ -69,7 +69,7 @@
         <div class="row ftco-animate">
           <div class="col-md-12">
             <div class="carousel-properties owl-carousel">
-              <div class="item">
+              <!-- <div class="item">
                 <div class="property-wrap ftco-animate">
 		        			<a href="#" class="img" style="background-image: url(images/work-1.jpg);">
 		        				<div class="rent-sale">
@@ -97,7 +97,7 @@
 		        				</div>
 		        			</div>
 		        		</div>
-              </div>
+              </div> -->
               <div class="item">
                 <div class="property-wrap ftco-animate">
 		        			<a href="#" class="img" style="background-image: url(images/work-2.jpg);">
@@ -112,17 +112,17 @@
 		        					<li><span class="flaticon-bathtub"></span>2</li>
 		        					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
 		        				</ul>
-		        				<h3><a href="#">The Blue Sky Home</a></h3>
-		        				<span class="location">Oakland</span>
+		        				<h3><a href="#">Apartment in Barri Antic</a></h3>
+		        				<span class="location">Viladecans</span>
 		        				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
 		        					<span class="fa fa-link"></span>
 		        				</a>
 		        				<div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
 		        					<div class="d-flex align-items-center">
 			        					<div class="img" style="background-image: url(images/person_1.jpg);"></div>
-			        					<h3 class="ml-2">John Dorf</h3>
+			        					<h3 class="ml-2">Sara Álvarez</h3>
 			        				</div>
-			        				<span class="text-right">2 weeks ago</span>
+			        				<span class="text-right">3 weeks ago</span>
 		        				</div>
 		        			</div>
 		        		</div>
@@ -141,17 +141,17 @@
 		        					<li><span class="flaticon-bathtub"></span>2</li>
 		        					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
 		        				</ul>
-		        				<h3><a href="#">The Blue Sky Home</a></h3>
-		        				<span class="location">Oakland</span>
+		        				<h3><a href="#">Apartment in Santa Eulàlia</a></h3>
+		        				<span class="location">Hospitalet de Llobregat</span>
 		        				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
 		        					<span class="fa fa-link"></span>
 		        				</a>
 		        				<div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
 		        					<div class="d-flex align-items-center">
 			        					<div class="img" style="background-image: url(images/person_1.jpg);"></div>
-			        					<h3 class="ml-2">John Dorf</h3>
+			        					<h3 class="ml-2">Sofía Martínez</h3>
 			        				</div>
-			        				<span class="text-right">2 weeks ago</span>
+			        				<span class="text-right">5 weeks ago</span>
 		        				</div>
 		        			</div>
 		        		</div>
@@ -170,15 +170,15 @@
 		        					<li><span class="flaticon-bathtub"></span>2</li>
 		        					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
 		        				</ul>
-		        				<h3><a href="#">The Blue Sky Home</a></h3>
-		        				<span class="location">Oakland</span>
+		        				<h3><a href="#">Apartment in Buenos Aires</a></h3>
+		        				<span class="location">Martorell</span>
 		        				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
 		        					<span class="fa fa-link"></span>
 		        				</a>
 		        				<div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
 		        					<div class="d-flex align-items-center">
 			        					<div class="img" style="background-image: url(images/person_1.jpg);"></div>
-			        					<h3 class="ml-2">John Dorf</h3>
+			        					<h3 class="ml-2">Juan García</h3>
 			        				</div>
 			        				<span class="text-right">2 weeks ago</span>
 		        				</div>
@@ -189,7 +189,11 @@
                 <div class="property-wrap ftco-animate">
 		        			<a href="#" class="img" style="background-image: url(images/work-5.jpg);">
 		        				<div class="rent-sale">
-		        					<span class="rent">Rent</span>
+                      <!-- Hacedme un condicional con EJS , de manera que si la varialbe 'role' vale 'inqulino' aparece el botón. Convertid el Span en un tipo botton o al menos metedle un <a>. -->
+                      <% if (role=='inquilino') { %>
+                      <span class="rent">Alquilar</span>
+                      <%  }  %> 
+                        
 		        				</div>
 		        				<p class="price"><span class="orig-price">$300<small> / mo</small></span></p>
 		        			</a>
@@ -199,21 +203,70 @@
 		        					<li><span class="flaticon-bathtub"></span>2</li>
 		        					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
 		        				</ul>
-		        				<h3><a href="#">The Blue Sky Home</a></h3>
-		        				<span class="location">Oakland</span>
+		        				<h3><a href="#">Apartment in Montigalà</a></h3>
+		        				<span class="location">Badalona</span>
 		        				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
 		        					<span class="fa fa-link"></span>
 		        				</a>
 		        				<div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
 		        					<div class="d-flex align-items-center">
 			        					<div class="img" style="background-image: url(images/person_1.jpg);"></div>
-			        					<h3 class="ml-2">John Dorf</h3>
+			        					<h3 class="ml-2">Alberto Pérez</h3>
 			        				</div>
-			        				<span class="text-right">2 weeks ago</span>
+			        				<span class="text-right">1 weeks ago</span>
 		        				</div>
 		        			</div>
 		        		</div>
               </div>
+              
+               <!-- Apartamento de prueba  -->
+               <div class="item">
+                <div class="property-wrap ftco-animate">
+                  <!-- En la siguiente líniahay que introducir la imágen principal -->
+                  <a href="#" class="img" style="background-image: url(https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?cs=srgb&dl=white-2-storey-house-near-trees-1115804.jpg&fm=jpg);">
+		        				<div class="rent-sale">
+                      <!-- Hacedme un condicional con EJS , de manera que si la varialbe 'role' vale 'inqulino' aparece el botón. Convertid el Span en un tipo botton o al menos metedle un <a>. -->
+                      <% if (role=='inquilino') { %>
+                      <span class="rent">Alquilar</span>
+                      <%  }  %> 
+                        
+                    </div>
+                    <!-- Aquí hemos introducido el precio mensual del apartamento -->
+		        				<p class="price"><span class="orig-price">1200€<small> / mo</small></span></p>
+		        			</a>
+		        			<div class="text">
+		        				<ul class="property_list">
+                      <!-- Aquí se han ocultado las camas que tiene el apartamento porque no lo vamos a usar -->
+                      <!-- <li><span class="flaticon-bed"></span>3 beds</li> -->
+
+                       <!-- (No sabemos bien qué hace la clase flaticon, quizá debería tener algún icono)Aquí hemos añadido
+                      'Flaticon-room' y hemos introducido cuántos habitaciones tiene el apartamento -->
+                      <li><span class="flaticon-room"></span>3 Rooms</li>
+                      <!-- Aquí introduciremos cuántos baños tiene el apartamento -->
+                      <li><span class="flaticon-bathtub"></span>2 Bathrooms</li>
+                      <!-- Aquí introduciremos cuántos metros tiene el apartamento -->
+		        					 <li><span class="flaticon-floor-plan"></span>85 Sqmt</li>
+                    </ul>
+                    <!-- Aquí se introduce el título -->
+		        				<h3><a href="#">Apartment in Platja D'Aro</a></h3>
+                    <!-- Aquí se introduce la localidad del Apartamento -->
+                    <span class="location">Platja d'Aro</span>
+		        				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+		        					<span class="fa fa-link"></span>
+		        				</a>
+		        				<div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
+		        					<div class="d-flex align-items-center">
+			        					<div class="img" style="background-image: url(images/person_1.jpg);"></div>
+			        					<h3 class="ml-2">Alberto Pérez</h3>
+                      </div>
+                      <!-- En principio esta línia no está prevista para que sea visualizada, pero podriamos plantearlo -->
+			        				<span class="text-right">1 weeks ago</span>
+		        				</div>
+		        			</div>
+		        		</div>
+              </div>
+
+               <!-- Aquí acaba el apartamento -->
             </div>
           </div>
         </div>
@@ -241,8 +294,8 @@
                     <div class="d-flex align-items-center">
                     	<div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
                     	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
+		                    <p class="name">Roger Pardo</p>
+		                    <span class="position">Estate Agent</span>
 		                  </div>
 	                  </div>
                   </div>
@@ -256,7 +309,7 @@
                     <div class="d-flex align-items-center">
                     	<div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
                     	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
+		                    <p class="name">Pol Vilches</p>
 		                    <span class="position">Marketing Manager</span>
 		                  </div>
 	                  </div>
@@ -271,8 +324,8 @@
                     <div class="d-flex align-items-center">
                     	<div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
                     	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
+		                    <p class="name">Arnau Jiménez</p>
+		                    <span class="position">Tenant</span>
 		                  </div>
 	                  </div>
                   </div>
@@ -286,8 +339,8 @@
                     <div class="d-flex align-items-center">
                     	<div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
                     	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
+		                    <p class="name">Mireia Marín</p>
+		                    <span class="position">Tenant</span>
 		                  </div>
 	                  </div>
                   </div>
@@ -301,8 +354,8 @@
                     <div class="d-flex align-items-center">
                     	<div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
                     	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
+		                    <p class="name">Teresa Monge</p>
+		                    <span class="position">Tenant</span>
 		                  </div>
 	                  </div>
                   </div>
