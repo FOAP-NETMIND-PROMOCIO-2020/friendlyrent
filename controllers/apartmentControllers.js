@@ -4,6 +4,16 @@ exports.getAllApartments = (req, res) => {
     });
 }
 
+exports.postSignUp = (req, res) => {
+    let parameters = req.body;
+    console.log("valor de parameters --> ", parameters)
+    parameters = JSON.stringify(parameters);
+
+    res.render('index', {
+        role: 'inquilino'
+    });
+}
+
 exports.getNewApartment = (req, res) => {
     const services = [{
         label: "WiFi",

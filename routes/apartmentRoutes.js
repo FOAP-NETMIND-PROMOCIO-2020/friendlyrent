@@ -9,4 +9,7 @@ router.get('/new-apartment', apartmentControllers.getNewApartment);
 
 router.post('/new-apartment', apartmentControllers.postNewApartment);
 
+router.post("/post-register-new-user", apartmentControllers.postSignUp);
+
+
 module.exports = router;
