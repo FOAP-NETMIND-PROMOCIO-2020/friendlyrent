@@ -15,6 +15,55 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- bootstrap v4.5.0 //https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+ 
+    <!-- JS, Popper.js, and jQuery  bootstrap v4.5.0 //https://getbootstrap.com/-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+ 
+    <!-- Free Font Awesome 6 icons //https://fontawesome.com/icons?d=gallery  -->
+    <script src="https://kit.fontawesome.com/af2d6df622.js" crossorigin="anonymous"></script>
+
+    <!--styles in order to get the modal window-->
+    <style>
+      .divider-text {
+          position: relative;
+          text-align: center;
+          margin-top: 15px;
+          margin-bottom: 15px;
+      }
+  
+      .divider-text span {
+          padding: 7px;
+          font-size: 12px;
+          position: relative;
+          z-index: 2;
+      }
+  
+      .divider-text:after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          border-bottom: 1px solid #ddd;
+          top: 55%;
+          left: 0;
+          z-index: 1;
+      }
+  
+      .btn-facebook {
+          background-color: #405D9D;
+          color: #fff;
+      }
+  
+      .btn-twitter {
+          background-color: #42AEEC;
+          color: #fff;
+      }
+  </style>
+
   </head>
   <body>
     
@@ -31,13 +80,81 @@
 			  
 	          <li class="nav-item"><a href="team.html" class="nav-link">Team</a></li>
 	          
-	          <li class="nav-item"><a href="properties.html" class="nav-link">Properties</a></li>
+            <li class="nav-item"><a href="properties.html" class="nav-link">Properties</a></li>
+
+            <!--this is the modal button-->
+            <li class="nav-item"><a  data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign up </a></li>
 	      
 	          
 	        </ul>
 	      </div>
 	    </div>
-	  </nav>
+    </nav>
+    
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+           
+          <!--This is the modal's content-->
+            <div class="card bg-light">
+              <form method="POST" action="/post-register-new-user">
+              <article class="card-body mx-auto" style="max-width: 400px;">
+                <h4 class="card-title mt-3 text-center">Create Account</h4>
+                <p class="text-center">Get started with your free account</p>
+               
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <input name="userName" class="form-control" placeholder="Full name" type="text">
+                  </div> <!-- form-group// -->
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> <i class="fas fa-address-card"></i> </span>
+                    </div>
+                    <input name="userCode" class="form-control" placeholder="User name" type="text">
+                  </div> <!-- form-group// -->
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    </div>
+                    <input name="email" class="form-control" placeholder="Email address" type="email">
+                  </div> <!-- form-group// -->
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                    </div>
+                    <select name="identifUser" class="form-control">
+                      <option selected=""> what are you looking for? </option>
+                      <option value="true"> I'm renting my apartment </option>
+                      <option value="false">I'm looking for an apartment</option>
+                    </select>
+                  </div> <!-- form-group end.// -->
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input name="userPassword" class="form-control" placeholder="Create password" type="password">
+                  </div> <!-- form-group// -->
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input name="password" class="form-control" placeholder="Repeat password" type="password">
+                  </div> <!-- form-group// -->
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
+                  </div> <!-- form-group// -->
+                  <p class="text-center">Have an account? <a href="">Log In</a> </p>
+                </form>
+              </article>
+            </div> 
+          
+        </div>
+      </div>
+    </div>
+    <!-- END modal-->
     <!-- END nav -->
     
     <section class="hero-wrap" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
