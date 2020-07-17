@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
+const commentsSchema = Schema({
+    _id: false, 
+    comment: String,
+    user_id: {
+        type: String,
+        ref: 'user'
+        },
+    creationDate: String
+})
+
 const userSchema = new mongoose.Schema({
 
     fullName: {
@@ -50,7 +60,10 @@ const userSchema = new mongoose.Schema({
         id: String,
         token: String
     },
-
+    comments: {
+        type: [commentsSchema],    // Array de objetos
+        required: false
+    }
 });
 
 userSchema.methods.generateHash = function (password) {
