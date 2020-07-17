@@ -7,6 +7,9 @@ module.exports = (app, passport) => {
     });
 
     app.get('/login', (req, res)  => {
+        if(req.isAuthenticated()) {
+            return res.redirect('/');
+        }
         res.render('login', {
             message: req.flash('loginMessage')  //mensaje desde la misma vista
         });
@@ -30,9 +33,9 @@ module.exports = (app, passport) => {
         failureFlash: true
     }));
 
-    app.get('/profile', isLoggedIn, (req, res) => {
+    app.get('/profile', isLoggedIn, (req, res) => {  // impide acceder a los no logueados
         res.render('profile', {
-            user: req.user
+            user: req.user     // aquí está la info del usuario
         });
     });
 
@@ -45,6 +48,6 @@ module.exports = (app, passport) => {
         if (req.isAuthenticated()) {
             return next();
         }
-        return res.redirect('/');
+        return res.redirect('/login');
     }
 }

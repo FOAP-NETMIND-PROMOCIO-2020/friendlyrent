@@ -1,8 +1,29 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
-const passport = require('passport');
 
 const userSchema = new mongoose.Schema({
+
+    userCode: {
+        type: String,
+        required: false
+    },
+    email: {
+        type: String,
+        required: false
+    },
+    role: {
+        type: String,
+        required: false
+    },
+    unsubscribeUser: {
+        type: String,
+        required: false
+    },
+    image: {
+        type: String,
+        required: false
+    },
+
     local: {
         email: String,
         password: String
@@ -36,4 +57,4 @@ userSchema.methods.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.local.password); //compara la contraseña con la almacenada en la BBDD
 }
 
-module.exports = mongoose.model('User', userSchema, 'User');
+module.exports = mongoose.model('user', userSchema, 'user');

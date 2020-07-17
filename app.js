@@ -13,22 +13,21 @@ const session = require('express-session');
 const apartmentRoutes = require('./routes/apartmentRoutes')
 
 const { url } = require('./config/database');
+const { clear } = require('console');
 
 // Connection to DDBB
 mongoose.connect(url, {
-    //useMongoClient: true    //OJO, esto es deprecated y Mongo sugiere poner las dos instrucciones siguientes:
     useNewUrlParser: true,
     useUnifiedTopology: true    
 })
 require('./config/passport')(passport);
 
-
-//server variables
+// server variables
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views')); //da la dirección de la carpeta views
 app.set('view engine', 'ejs');
 
-//midleware
+// middleware
 app.use(morgan('dev'));
 app.use(cookieParser());  //administra cookies
 app.use(bodyparser.urlencoded({extended: false}));  //info interpretable a través de la url

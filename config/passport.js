@@ -28,12 +28,15 @@ module.exports = (passport) => {
                 var newUser = new User();
                 newUser.local.email = email;
                 newUser.local.password = newUser.generateHash(password);
+                newUser.role = "";
+                newUser.email = email;
+                console.log("nuevo usuario", newUser)
                 newUser.save((err) => {
                     if (err) {throw err;}
                     return done(null, newUser);
-                })
+                });
             }
-        })
+        });
     }
      ));
 
@@ -45,12 +48,14 @@ module.exports = (passport) => {
      },
     function (req, email, password, done) {
         User.findOne({'local.email': email}, function(err, user) {
+            console.log("Usuario encontrado:", user, email)
+
             if (err) { return done(err);}
             if (!user) {
-                return done(null, false, req.flash('loginMessage', 'NO user found.'));
+                return done(null, false, req.flash('loginMessage', 'No user found.'));
             } 
             if (!user.validatePassword(password)) {
-                return done(null, false, req.flash('loginMessage', 'Wrong passwoed'));
+                return done(null, false, req.flash('loginMessage', 'Wrong password'));
             }
             return done(null, user);
         })
