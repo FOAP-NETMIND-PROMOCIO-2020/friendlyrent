@@ -81,7 +81,11 @@
 
             <!--this is the modal button-->
             <li class="nav-item"><a  data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign up </a></li>
-	      
+            <!--li class="nav-item"><a  data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign in </a></li>
+            <li class="nav-item"><a href="/signup" class="nav-link">Sign up </a></li-->
+            <li class="nav-item"><a href="/login" class="nav-link">Sign in </a></li>	
+            <li class="nav-item"><a href="/profile" class="nav-link">Log out </a></li>	      
+      
 	          
 	        </ul>
 	      </div>
@@ -95,7 +99,7 @@
            
           <!--This is the modal's content-->
             <div class="card bg-light">
-              <form method="POST" action="/post-register-new-user">
+              <form method="POST" action="/signup">
               <article class="card-body mx-auto" style="max-width: 400px;">
                 <h4 class="card-title mt-3 text-center">Create Account</h4>
                 <p class="text-center">Get started with your free account</p>
@@ -104,7 +108,7 @@
                     <div class="input-group-prepend">
                       <label for="fullName" class="input-group-text"> <i class="fa fa-user"></i> </label>
                     </div>
-                    <input id="fullName" name="userName" class="form-control" placeholder="Full name" type="text">
+                    <input id="fullName" name="fullName" class="form-control" placeholder="Full name" type="text">
                   </div> <!-- form-group// -->
                   <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -124,8 +128,8 @@
                     </div>
                     <select id="select" name="identifUser" class="form-control">
                       <option selected=""> what are you looking for? </option>
-                      <option value="true"> I'm renting my apartment </option>
-                      <option value="false">I'm looking for an apartment</option>
+                      <option value="owner"> I'm renting my apartment </option>
+                      <option value="customer">I'm looking for an apartment</option>
                     </select>
                   </div> <!-- form-group end.// -->
                   <div class="form-group input-group">
