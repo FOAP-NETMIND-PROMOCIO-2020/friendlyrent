@@ -1,15 +1,13 @@
 const Apartment = require('../models/apartments').Apartment
+const Services = require('../models/apartments').Services
 
 //endpoint --> /
 exports.getAllApartments = async(req, res) => {
 
-    let apartments = await Apartment.getAllApartments();
-    //
-    console.log('--------------------******----------------------------HOLAAAAAA---------------*********---------------- ',apartments);
-
     res.render('index', {
         role: 'inquilino'
     });
+    
 }
 
 //endpoint --> /post-register-new-user
