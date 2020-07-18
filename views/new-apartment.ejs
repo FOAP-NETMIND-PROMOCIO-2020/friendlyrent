@@ -116,7 +116,7 @@
         <div class="row">
             <div class="form-group col-sm">
                 <label for="">Services</label>
-                <select multiple class="form-control" id="services">
+                <select multiple class="form-control" id="services" name="services">
                     <% services.forEach(function(service){ %>
                     <option name="<%= service.value %>"> <%= service.label %></option>
                     <% }) %>
@@ -169,17 +169,17 @@
 
             <div class="form-group col-sm">
                 <label for="">Title 2</label>
-                <input type="text" class="form-control d-inline" name="title-photo-2" id="title-photo-2" placeholder="Insert photo title" maxlength="30" required>    
+                <input type="text" class="form-control d-inline" name="titlePhoto2" id="title-photo-2" placeholder="Insert photo title" maxlength="30" required>    
             </div>
 
             <div class="form-group col-sm">
                 <label for="">Title 3</label>
-                <input type="text" class="form-control d-inline" name="title-photo-3" id="title-photo-3" placeholder="Insert photo title" maxlength="30" required>    
+                <input type="text" class="form-control d-inline" name="titlePhoto3" id="title-photo-3" placeholder="Insert photo title" maxlength="30" required>    
             </div>
 
             <div class="form-group col-sm">
                 <label for="">Title 4</label>
-                <input type="text" class="form-control d-inline" name="title-photo-4" id="title-photo-4" placeholder="Insert photo title" maxlength="30" required>    
+                <input type="text" class="form-control d-inline" name="titlePhoto4" id="title-photo-4" placeholder="Insert photo title" maxlength="30" required>    
             </div>
             
         </div>
@@ -189,22 +189,22 @@
                 <div class="row">
             <div class="form-group col-sm">
                 <label for="">Main photo</label>
-                <input type="url" class="form-control" name="mainPhoto-url" id="mainPhoto-url" required>
+                <input type="url" class="form-control" name="mainPhotoUrl" id="mainPhoto-url" required>
             </div>
 
             <div class="form-group col-sm">
                 <label for="">Photo 2</label>
-                <input type="url" class="form-control" name="photo-2" id="photo-2" required>
+                <input type="url" class="form-control" name="photo2" id="photo-2" required>
             </div>
             
             <div class="form-group col-sm">
                 <label for="">Photo 3</label>
-                <input type="url" class="form-control" name="photo-3" id="photo-3" required>
+                <input type="url" class="form-control" name="photo3" id="photo-3" required>
             </div>
             
             <div class="form-group col-sm">
                 <label for="">Photo 4</label>
-                <input type="url" class="form-control" name="photo-4" id="photo-4" required>
+                <input type="url" class="form-control" name="photo4" id="photo-4" required>
             </div>
         </div>
 
