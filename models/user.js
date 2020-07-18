@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
-const commentsSchema = Schema({
-    _id: false, 
+const commentsSchema = new mongoose.Schema({
+    _id: false,
     comment: String,
     user_id: {
         type: String,
         ref: 'user'
-        },
+    },
     creationDate: String
 })
 
@@ -61,16 +61,16 @@ const userSchema = new mongoose.Schema({
         token: String
     },
     comments: {
-        type: [commentsSchema],    // Array de objetos
+        type: [commentsSchema], // Array de objetos
         required: false
     }
 });
 
-userSchema.methods.generateHash = function (password) {
+userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 };
 
-userSchema.methods.validatePassword = function (password) {
+userSchema.methods.validatePassword = function(password) {
     return bcrypt.compareSync(password, this.local.password); //compara la contraseña con la almacenada en la BBDD
 }
 
