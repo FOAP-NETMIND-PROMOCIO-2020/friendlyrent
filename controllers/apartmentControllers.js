@@ -10,7 +10,6 @@ exports.getAllApartments = async(req, res) => {
     
 }
 
-//endpoint --> /post-register-new-user
 exports.postSignUp = (req, res) => {
     let parameters = req.body;
     console.log("valor de parameters --> ", parameters)
