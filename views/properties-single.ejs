@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Friendly Rent - Critica a tu casero/a</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/css/animate.css">
+    
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/css/flaticon.css">
+	<link rel="stylesheet" href="/css/style.css">
+	
+
+	<!-- These are the libraries to use with the GPS loctaion plot API-->  
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+		integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+		crossorigin=""></script>
+	<style>
+		#mapid {
+			height: 360px; 
+			width: 100%;
+			
+		}
+	</style>
+
+  </head>
+
+  <body>
+    
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Friendly Rent</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+	         
+	          <li class="nav-item"><a href="team.html" class="nav-link">Team</a></li>
+	          <li class="nav-item active"><a href="properties.html" class="nav-link">Properties</a></li>
+	          
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+    
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate pb-0 text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="properties.html">Properties <i class="fa fa-chevron-right"></i></a></span> <span>Properties Single <i class="fa fa-chevron-right"></i></span></p>
+            <h1 class="mb-3 bread">Property Details</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="ftco-section ftco-property-details">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12">
+					<div class="property-details">
+
+						<div id="demo" class="carousel slide img" data-ride="carousel">
+
+							<!-- Indicators -->
+							<ul class="carousel-indicators">
+								<% for (let i=0; i< apartment.photos.length; i++) { %>
+								<li data-target="#demo" data-slide-to="<%= i %>" <% if (i== 0) { %> class="active" <% } %>></li>									  
+							  	<%}%>
+
+							</ul>
+						  
+							<!-- The slideshow -->
+							<div class="carousel-inner">
+								<% for (let i=0; i< apartment.photos.length; i++) { %>
+								<div class="carousel-item <% if (i== 0) { %>active <%}%>">
+										<img class="img" src="<%=apartment.photos[i].url %>" alt="<%=apartment.photos[i].title %>">
+							  		</div>
+							  	<% } %>
+							</div>
+						  
+							<!-- Left and right controls -->
+							<a class="carousel-control-prev" href="#demo" data-slide="prev">
+							  <span class="carousel-control-prev-icon"></span>
+							</a>
+							<a class="carousel-control-next" href="#demo" data-slide="next">
+							  <span class="carousel-control-next-icon"></span>
+							</a>
+						  
+						  </div>
+
+						<div class="row">
+						
+							<div class="text col-md-4">
+								<span class="subheading"><%= apartment.location.city %></span>
+								<h2><%= apartment.title %></h2>
+								<h4>Address  <%= apartment.location.address %></h4>
+								<h4>City  <%= apartment.location.city %></h4>
+								<h4>Province  <%= apartment.location.province %></h4>
+								<h4 data-latitude="<%= apartment.location.gps[0]%>" data-longitude="<%= apartment.location.gps[1]%>" ></data-longitude>Location</h4>
+								<h6> Latitude <%= apartment.location.gps[0]%> Longitude <%= apartment.location.gps[1]%> </h6>
+							</div>																			  
+								
+							
+							<!-- Map api beginning-->
+
+							<div class="col-md-8">
+								<div id="mapid"></div>
+								<script>
+									var mymap = L.map('mapid').setView([41.390205, 2.154007], 13);
+									L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib21pcmFzIiwiYSI6ImNrY2N5Z2RseTA5aTkycG9hcGZiYzJrYmwifQ.aiWWPHaXoI48e8V_l-bkyg', {
+										attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+										maxZoom: 18,
+										id: 'mapbox/streets-v11',
+										tileSize: 512,
+										zoomOffset: -1,
+										accessToken: 'your.mapbox.access.token'
+									}).addTo(mymap);
+									
+								</script>
+							
+							<script defer>
+								if (document.querySelector('[data-latitude]')) {
+									let coordinates = document.querySelector("h4[data-latitude]").dataset 
+									var latitude = coordinates.latitude;															
+									var longitude = coordinates.longitude;
+
+								console.log(latitude + " " + longitude);
+								if (latitude && longitude) {
+									var marker = L.marker([latitude, longitude]).addTo(mymap);
+									mymap.flyTo([latitude, longitude], 15);
+								}
+							}
+							</script>
+
+
+							</div>
+
+							<!-- Map implementation ends-->
+
+						</div>
+					</div>
+				</div>
+			</div>  
+		</div>
+		  
+		  
+
+
+      	<div class="row">
+      		<div class="col-md-12 pills">
+						<div class="bd-example bd-example-tabs">
+							<div class="d-flex">
+							  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+							    <li class="nav-item">
+							      <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Features</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Description</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Review</a>
+							    </li>
+							  </ul>
+							</div>
+
+						  <div class="tab-content" id="pills-tabContent">
+						    <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+						    	<div class="row">
+						    		<div class="col-md-4">
+						    			<ul class="features">
+						    				<li class="check"><span class="fa fa-check-circle"></span>Square Metres  <%= apartment.squareMetres %></li>
+						    				<li class="check"><span class="fa fa-check-circle"></span>Bedrooms <%= apartment.rooms %></li>
+						    				<li class="check"><span class="fa fa-check-circle"></span>Bathrooms  <%= apartment.bathrooms %></li>
+
+						    			</ul>
+						    		</div>
+						    		<div class="col-md-4">
+						    			<ul class="features">
+											<% for (let i = 0; i< apartment.services.length; i++) { %>
+												<li class="check"><span class="fa fa-check-circle"></span><%= apartment.services[i].codeService %>  <span class="<%= apartment.services[i].iconService %>"></span></li>
+												
+											<%}	%>
+										</ul>
+						    		</div>
+
+						    	</div>
+						    </div>
+
+						    <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
+								<% if (apartment.description) { %>
+									<p><%=apartment.description %></p>
+								<% } %>	
+
+								<% if (apartment.terms) { %>
+									<h4>Terms: </h4>
+									<p><%=apartment.terms %></p>
+								<% } %>	
+							  
+						    </div>
+
+						    <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+						      <div class="row">
+							   		<div class="col-md-7">
+										<h3 class="head"> <%=apartment.comments.length %> Reviews</h3>
+										<% for (let i = 0; i< apartment.comments.length; i++) { %>
+											<div class="review d-flex">
+									   			<div class="desc">
+													<h4>
+														<span class="text-left"><%=apartment.comments[i].user_id.userName %></span>
+														<span class="text-right"><%=apartment.comments[i].creationDate %></span>													   
+													</h4>
+													
+													<p><%=apartment.comments[i].comment %></p>
+												</div>
+											</div>
+										<% } %>   
+									   		
+							   		</div>
+							   		
+							   	</div>
+						    </div>
+						  </div>
+						</div>
+		      </div>
+				</div>
+      </div>
+    </section>
+
+    
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/jquery.easing.1.3.js"></script>
+  <script src="/js/jquery.waypoints.min.js"></script>
+  <script src="/js/jquery.stellar.min.js"></script>
+  <script src="/js/owl.carousel.min.js"></script>
+  <script src="/js/jquery.magnific-popup.min.js"></script>
+  <script src="/js/jquery.animateNumber.min.js"></script>
+  <script src="/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="/js/google-map.js"></script>
+  <script src="/js/main.js"></script>
+    
+  </body>
+</html>

@@ -6,4 +6,6 @@ const apartmentControllers = require('../controllers/apartmentControllers');
 
 router.get('/', apartmentControllers.getAllApartments);
 
+router.get('/apartment/:idApartment', apartmentControllers.getDetailedApartment); 
+
 module.exports = router;
