@@ -1,5 +1,7 @@
 exports.getAllApartments = (req, res) => {
-    res.render('index');
+    res.render('index', {
+        role: 'inquilino'
+    });
 }
 
 exports.getDetailedApartment = (req, res) => {
@@ -90,12 +92,44 @@ exports.getDetailedApartment = (req, res) => {
     });
 }
 
+exports.postSignUp = (req, res) => {
+    let parameters = req.body;
+    console.log("valor de parameters --> ", parameters)
+    parameters = JSON.stringify(parameters);
 
-/* exports.getDetailedApartment = async (req, res) => {
-    const idApartment = req.params._id;
-    const apartment = await bookingsApartments.apartments.findById(idApartment);
-    
-    res.render('properties-single');
+    res.render('index', {
+        role: 'inquilino'
+    });
 }
 
-*/
+exports.getNewApartment = (req, res) => {
+    const services = [{
+        label: "WiFi",
+        value: "wifi"
+    }, 
+    {
+        label: "TV",
+        value: "tv"
+    },
+    {
+        label: "AC",
+        value: "ac"
+    }, 
+    {
+        label: "WC",
+        value: "wc"
+    }, 
+    {
+        label: "Kitchen",
+        value: "kitchen"
+    }]
+
+    res.render('new-apartment', {
+        services: services
+    });
+}
+
+exports.postNewApartment = (req, res) => {
+    res.send("Hemos recibido los datos del apartamento");
+    console.log("Datos nuevo apartamento", req.body);
+}
