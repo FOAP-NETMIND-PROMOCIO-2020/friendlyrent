@@ -33,5 +33,70 @@
         </div>
     </div>
     
+    <!-- Mostrar Tablas perfil cliente y propietario-->
+    <div class="container">
+        <% if (isCustomer) { %>
+        <div>
+            <br>
+            <hr>
+            <h2>My history</h2>
+            <p>List of rented apartments:</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Apartment Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i = 0; i < apartmentCustomer.length; i++) { %>
+                    <tr>
+                        <td><%= apartmentCustomer[i].title %></td>
+                        <td><%= apartmentCustomer[i].startDate %></td>
+                        <td><%= apartmentCustomer[i].endDate %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <% } else if (isOwner) { %>
+
+        <div>
+            <br>
+            <hr>
+            <h2>My history</h2>
+            <p>List of rented apartments:</p>
+            <br>
+            <% for (let i = 0; i < apartmentOwner.length; i++) { %>
+            <h4><u><%= apartmentOwner[i].title %></u></h4>
+            <br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let x = 0; x < apartmentOwner[i].customerData.length; x++) { %>
+                    <tr>
+                        <td><%= apartmentOwner[i].customerData[x].userName %></td>
+                        <td><%= apartmentOwner[i].customerData[x].startDate %></td>
+                        <td><%= apartmentOwner[i].customerData[x].endDate %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <br>
+            <% } %>
+        </div>
+
+        <% } %>
+
+    </div>
+
 </body>
 </html>
