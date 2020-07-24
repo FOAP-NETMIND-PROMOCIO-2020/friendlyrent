@@ -10,7 +10,8 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyparser = require('body-parser');
 const session = require('express-session');
-const apartmentRoutes = require('./routes/apartmentRoutes')
+const apartmentRoutes = require('./routes/apartmentRoutes');
+const bookingsRoutes = require('./routes/bookingsRoutes');
 
 const { url } = require('./config/database');
 const { clear } = require('console');
@@ -42,6 +43,8 @@ app.use(flash());
 
 app.use(express.static('public'));
 app.use(apartmentRoutes);
+//app.use(userRoutes);
+app.use(bookingsRoutes);
 
 // routes
 require('./routes/userRoutes')(app, passport);

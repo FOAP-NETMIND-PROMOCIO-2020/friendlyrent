@@ -38,7 +38,6 @@
   </head>
 
   <body>
-    
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="index.html">Friendly Rent</a>
@@ -58,7 +57,6 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
-    
     <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -117,6 +115,9 @@
 								<h4>Province  <%= apartment.location.province %></h4>
 								<h4 data-latitude="<%= apartment.location.gps[0]%>" data-longitude="<%= apartment.location.gps[1]%>" ></data-longitude>Location</h4>
 								<h6> Latitude <%= apartment.location.gps[0]%> Longitude <%= apartment.location.gps[1]%> </h6>
+								<% if (isLoggedUser) { %>
+									<a href="/new-booking"><button type="button">Rent</button></a>
+								<% } %>
 							</div>																			  
 								
 							
@@ -226,7 +227,7 @@
 											<div class="review d-flex">
 									   			<div class="desc">
 													<h4>
-														<span class="text-left"><%=apartment.comments[i].user_id.userName %></span>
+														<span class="text-left"><%=apartment.comments[i].user_id %></span>
 														<span class="text-right"><%=apartment.comments[i].creationDate %></span>													   
 													</h4>
 													

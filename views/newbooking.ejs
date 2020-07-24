@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Information's form</title>
+</head>
+
+<body>
+    <header>
+        <h2>Rental Information</h2>
+    </header>
+    <main>
+        <form action="/new-booking" method="POST">
+            <label for="rentalStartDate">Rental start date</label><br>
+            <input type="text" id="rentalStartDate" name="rentalStartDate" required>
+            <label for="rentalDuration">Rental duration</label><br>
+            <input type="text" id="rentalDuration" name="rentalDuration" required value="5*12 months">
+            <label for="rentalPrice">Rental price</label><br>
+            <input type="text" id="rentalPrice" name="rentalPrice" required value="<%= apartment.price %>">
+            <input id="submit" type="submit">
+        </form>
+    </main>
+
+</body>
+
+</html>
