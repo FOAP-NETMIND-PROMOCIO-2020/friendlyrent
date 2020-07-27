@@ -118,7 +118,7 @@
                 <label for="">Services</label>
                 <select multiple class="form-control" id="services" name="services">
                     <% services.forEach(function(service){ %>
-                    <option name="<%= service.value %>"> <%= service.label %></option>
+                    <option name="<%= service.codeService %>"> <%= service.codeService %></option>
                     <% }) %>
                 </select>
             </div>

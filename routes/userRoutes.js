@@ -35,7 +35,58 @@ module.exports = (app, passport) => {
 
     app.get('/profile', isLoggedIn, (req, res) => {  // impide acceder a los no logueados
         res.render('profile', {
-            user: req.user     // aquí está la info del usuario
+            user: req.user,     // aquí está la info del usuario
+            isOwner: (req.user && req.user.identifUser == "owner"),
+            isCustomer: (req.user && req.user.identifUser == "customer"),
+            apartmentCustomer: [{
+                title: "Platja D'Aro",
+                startDate: "2018-01-01",
+                endDate: "2020-01-01"
+            },
+            {
+                title: "Calafat",
+                startDate: "2020-03-01",
+                endDate: "2020-07-01"
+            }
+            ],
+            apartmentOwner: [
+                {
+                    title: "Palafurgell",
+                    customerData: [
+                        {
+                            userName: "Manolo",
+                            startDate: "2020-01-01",
+                            endDate: "2020-03-01"
+                        },
+                        {
+                            userName: "LauraDrums",
+                            startDate: "2020-03-02",
+                            endDate: "2020-05-05"
+                        }
+                    ]
+                },
+                {
+                    title: "Begur",
+                    customerData: [
+                        {
+                            userName: "Anna",
+                            startDate: "2020-01-01",
+                            endDate: "2020-03-01"
+                        },
+                        {
+                            userName: "Raul",
+                            startDate: "2020-03-02",
+                            endDate: "2020-05-05"
+                        },
+                        {
+                            userName: "Sergi",
+                            startDate: "2020-05-31",
+                            endDate: "2020-07-15"
+                        }
+                    ]
+                }
+                
+            ]
         });
     });
 
