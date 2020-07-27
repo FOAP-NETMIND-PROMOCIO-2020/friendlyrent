@@ -97,7 +97,7 @@ const apartmentSchema = new Schema({
     idBooking: {
         type: String,
         ref: 'bookings',
-        required: true
+        required: false
     }
 })
 
