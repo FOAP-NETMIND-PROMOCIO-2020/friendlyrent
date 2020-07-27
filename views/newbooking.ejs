@@ -4,24 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Rental Information's form</title>
 </head>
 
 <body>
+    <div class="container">
     <header>
         <h2>Rental Information</h2>
+        <br>
+        <br>
     </header>
     <main>
-        <form action="/new-booking" method="POST">
-            <label for="rentalStartDate">Rental start date</label><br>
-            <input type="text" id="rentalStartDate" name="rentalStartDate" required>
-            <label for="rentalDuration">Rental duration</label><br>
-            <input type="text" id="rentalDuration" name="rentalDuration" required value="5*12 months">
-            <label for="rentalPrice">Rental price</label><br>
-            <input type="text" id="rentalPrice" name="rentalPrice" required value="<%= apartment.price %>">
-            <input id="submit" type="submit">
+        <form class="form-horizontal" action="/new-booking" method="POST">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="rentalStartDate">Rental Start Date</label>
+            <div class="col-sm-10">
+             <input type="text" id="rentalStartDate" name="rentalStartDate" required>
+            </div>
+          </div> 
+            <br>
+          <div class="form-group">  
+            <label class="control-label col-sm-2" for="rentalTime">Rental Time</label>
+            <div class="col-sm-10">
+             <input type="text" id="rentalTime" name="rentalTime" required value="5*12 months">
+            </div>
+          </div>
+            <br>
+          <div class="form-group">  
+            <label class="control-label col-sm-2" for="rentalPrice">Rental Price</label>
+            <div class="col-sm-10">
+             <input type="text" id="rentalPrice" name="rentalPrice" required value="<%# bookings.price %>">
+            </div>
+          </div>
+            <br>
+          <div class="col-sm-offset-2 col-sm-10">
+            <input id="submit" type="submit" value="Send">
+          </div>
         </form>
     </main>
+    </div>
 
 </body>
 

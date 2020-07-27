@@ -2,9 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const apartmentControllers = require('../controllers/apartmentControllers');
+const bookingsControllers = require('../controllers/bookingsControllers');
 
-router.get('/new-booking/:idApartment', bookingControllers.getNewRental); 
-router.post('/new-booking', bookingControllers.postNewRental);
+router.get('/new-booking', bookingsControllers.getNewRental); 
+router.post('/new-booking', bookingsControllers.postNewRental);
 
 module.exports = router;
