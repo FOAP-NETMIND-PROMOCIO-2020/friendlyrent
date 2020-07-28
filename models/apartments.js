@@ -162,6 +162,19 @@ apartmentSchema.statics.canLeaveComment = async function(idUser,idApartament) {
 
 }
 
+// CONSULTA RESERVA ACTUAL DE APARTAMENTOS POR PROPIETARIO
+/**
+ * get all the apartments
+ * @param {ObjectId} id id usuario
+ */
+
+apartmentSchema.statics.getAllApartmentsOwnNow = async function (id) {
+
+    let resultado = await this.find({registerUser:id}).populate('registerUser').populate('idBooking');
+    console.log("que me sacas apartments", resultado);
+    return resultado;
+}
+
 //---------------------------END CONSULT------------------------
 
 //---------------------------INSERT------------------------
@@ -228,6 +241,8 @@ servicesSchema.statics.getAllServices = async function(searchCriteria = {}, want
 
 }
 
-exports.Apartment = mongoose.model('apartments', apartmentSchema, 'apartments');
+ exports.Apartment = mongoose.model('apartments', apartmentSchema, 'apartments');
 
-exports.Services = mongoose.model('services', servicesSchema, 'services');
+ exports.Services = mongoose.model('services', servicesSchema, 'services');
+
+// module.exports = mongoose.model('apartments', apartmentSchema, 'apartments');
