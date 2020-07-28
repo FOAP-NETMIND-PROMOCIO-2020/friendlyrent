@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Friendly Rent</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+
+                <li class="nav-item"><a href="team.html" class="nav-link">Team</a></li>
+
+                <li class="nav-item"><a href="properties.html" class="nav-link">Properties</a></li>
+
+                <!--this is the modal button-->
+                <li class="nav-item"><a data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign up </a>
+                </li>
+                <!--li class="nav-item"><a  data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign in </a></li>
+            <li class="nav-item"><a href="/signup" class="nav-link">Sign up </a></li-->
+                <li class="nav-item"><a href="/login" class="nav-link">Sign in </a></li>
+                <li class="nav-item"><a href="/profile" class="nav-link">Log out </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!--This is the modal's content-->
+            <div class="card bg-light">
+                <form method="POST" action="/signup">
+                    <article class="card-body mx-auto" style="max-width: 400px;">
+                        <h4 class="card-title mt-3 text-center">Create Account</h4>
+                        <p class="text-center">Get started with your free account</p>
+
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <label for="fullName" class="input-group-text"> <i class="fa fa-user"></i> </label>
+                            </div>
+                            <input id="fullName" name="fullName" class="form-control" placeholder="Full name"
+                                type="text">
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <label for="userName" class="input-group-text"> <i class="fas fa-address-card"></i>
+                                </label>
+                            </div>
+                            <input id="userName" name="userCode" class="form-control" placeholder="User name"
+                                type="text">
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <label for="email" class="input-group-text"> <i class="fa fa-envelope"></i> </label>
+                            </div>
+                            <input id="email" name="email" class="form-control" placeholder="Email address"
+                                type="email">
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <label for="select" class="input-group-text"> <i class="fa fa-building"></i> </label>
+                            </div>
+                            <select id="select" name="identifUser" class="form-control" required>
+                                <option value="" selected> what are you looking for? </option>
+                                <option value="owner"> I'm renting my apartment </option>
+                                <option value="customer">I'm looking for an apartment</option>
+                            </select>
+                        </div> <!-- form-group end.// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <label for="password" class="input-group-text"> <i class="fa fa-lock"></i> </label>
+                            </div>
+                            <input id="password" name="userPassword" class="form-control" placeholder="Create password"
+                                type="password">
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <label for="password2" class="input-group-text"> <i class="fa fa-lock"></i> </label>
+                            </div>
+                            <input id="password2" name="password" class="form-control" placeholder="Repeat password"
+                                type="password">
+                        </div> <!-- form-group// -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
+                        </div> <!-- form-group// -->
+                        <p class="text-center">Have an account? <a href="">Log In</a> </p>
+                </form>
+                </article>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END modal-->
