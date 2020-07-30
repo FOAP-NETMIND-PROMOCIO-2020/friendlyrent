@@ -2,160 +2,16 @@
 <html lang="en">
 
 <head>
+
   <title>Friendly Rent - Critica a tu casero/a!</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <%- include('partials/head'); %>
 
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-    <!-- bootstrap v4.5.0 //https://getbootstrap.com/ -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
- 
-    <!-- JS, Popper.js, and jQuery  bootstrap v4.5.0 //https://getbootstrap.com/-->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
- 
-    <!-- Free Font Awesome 6 icons //https://fontawesome.com/icons?d=gallery  -->
-    <script src="https://kit.fontawesome.com/af2d6df622.js" crossorigin="anonymous"></script>
-
-    <!--styles in order to get the modal window-->
-    <style>
-      .divider-text {
-          position: relative;
-          text-align: center;
-          margin-top: 15px;
-          margin-bottom: 15px;
-      }
-  
-      .divider-text label {
-          padding: 7px;
-          font-size: 12px;
-          position: relative;
-          z-index: 2;
-      }
-  
-      .divider-text:after {
-          content: "";
-          position: absolute;
-          width: 100%;
-          border-bottom: 1px solid #ddd;
-          top: 55%;
-          left: 0;
-          z-index: 1;
-      }
-  
-      .btn-facebook {
-          background-color: #405D9D;
-          color: #fff;
-      }
-  
-      .btn-twitter {
-          background-color: #42AEEC;
-          color: #fff;
-      }
-  </style>
-
-  </head>
-  <body>
-    
-	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Friendly Rent</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
-
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-			  <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-			  
-	          <li class="nav-item"><a href="team.html" class="nav-link">Team</a></li>
-	          
-            <li class="nav-item"><a href="properties.html" class="nav-link">Properties</a></li>
-
-            <!--this is the modal button-->
-            <li class="nav-item"><a  data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign up </a></li>
-            <!--li class="nav-item"><a  data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign in </a></li>
-            <li class="nav-item"><a href="/signup" class="nav-link">Sign up </a></li-->
-            <li class="nav-item"><a href="/login" class="nav-link">Sign in </a></li>	
-            <li class="nav-item"><a href="/profile" class="nav-link">Log out </a></li>	      
-      
-	          
-	        </ul>
-	      </div>
-	    </div>
-    </nav>
-    
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-           
-          <!--This is the modal's content-->
-            <div class="card bg-light">
-              <form method="POST" action="/signup">
-              <article class="card-body mx-auto" style="max-width: 400px;">
-                <h4 class="card-title mt-3 text-center">Create Account</h4>
-                <p class="text-center">Get started with your free account</p>
-               
-                  <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                      <label for="fullName" class="input-group-text"> <i class="fa fa-user"></i> </label>
-                    </div>
-                    <input id="fullName" name="fullName" class="form-control" placeholder="Full name" type="text">
-                  </div> <!-- form-group// -->
-                  <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                      <label for="userName" class="input-group-text"> <i class="fas fa-address-card"></i> </label>
-                    </div>
-                    <input id="userName" name="userCode" class="form-control" placeholder="User name" type="text">
-                  </div> <!-- form-group// -->
-                  <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                      <label for="email" class="input-group-text"> <i class="fa fa-envelope"></i> </label>
-                    </div>
-                    <input id="email" name="email" class="form-control" placeholder="Email address" type="email">
-                  </div> <!-- form-group// -->
-                  <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                      <label for="select" class="input-group-text"> <i class="fa fa-building"></i> </label>
-                    </div>
-                    <select id="select" name="identifUser" class="form-control" required>
-                      <option value="" selected> what are you looking for? </option>
-                      <option value="owner"> I'm renting my apartment </option>
-                      <option value="customer">I'm looking for an apartment</option>
-                    </select>
-                  </div> <!-- form-group end.// -->
-                  <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                      <label for="password" class="input-group-text"> <i class="fa fa-lock"></i> </label>
-                    </div>
-                    <input id="password" name="userPassword" class="form-control" placeholder="Create password" type="password">
-                  </div> <!-- form-group// -->
-                  <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                      <label for="password2" class="input-group-text"> <i class="fa fa-lock"></i> </label>
-                    </div>
-                    <input id="password2" name="password" class="form-control" placeholder="Repeat password" type="password">
-                  </div> <!-- form-group// -->
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
-                  </div> <!-- form-group// -->
-                  <p class="text-center">Have an account? <a href="">Log In</a> </p>
-                </form>
-              </article>
-            </div> 
-          
-        </div>
-      </div>
-    </div>
-    <!-- END modal-->
+  <!-- nav -->
+  <%- include('partials/header'); %>
+<!--<%- /*include('user/show', {user: user}); */%> you can include and you can even pass a variable to the view that you want to include -->
   
   <!-- END nav -->
 
@@ -640,22 +496,6 @@
       <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
         stroke="#F96D00" /></svg></div>
 
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
 
 </body>
 

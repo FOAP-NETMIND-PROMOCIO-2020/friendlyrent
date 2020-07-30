@@ -23,7 +23,7 @@ const commentsSchema = Schema({
     user_id: {
         type: String, 
         ref: 'user'},
-    createDate: String
+    creationDate: String
 })
 
 const apartmentSchema = new Schema({
@@ -97,7 +97,7 @@ const apartmentSchema = new Schema({
     idBooking: {
         type: String,
         ref: 'bookings',
-        required: true
+        required: false
     }
 })
 
@@ -162,6 +162,19 @@ apartmentSchema.statics.canLeaveComment = async function(idUser,idApartament) {
 
 }
 
+// CONSULTA RESERVA ACTUAL DE APARTAMENTOS POR PROPIETARIO
+/**
+ * get all the apartments
+ * @param {ObjectId} id id usuario
+ */
+
+apartmentSchema.statics.getAllApartmentsOwnNow = async function (id) {
+
+    let resultado = await this.find({registerUser:id}).populate('registerUser').populate('idBooking');
+    console.log("que me sacas apartments", resultado);
+    return resultado;
+}
+
 //---------------------------END CONSULT------------------------
 
 //---------------------------INSERT------------------------
@@ -191,13 +204,38 @@ apartmentSchema.statics.upDateApartment = async function(searchCriteria,paramete
 }//not checked
 
 /**
+ * This function creates a new comment about the rented apartment by the user
+ * @param {String} idUser 
+ * @param {String} comment 
+ */
+
+apartmentSchema.statics.createComment = (idUser, comment) => {
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd; 
+
+    let newComment = new Object({
+        comment: comment,
+        user_id: idUser,
+        creationDate: today
+    });
+
+    return newComment;
+}
+
+/**
  * with this you can only insert one or many comments meeting the $ push criteria of mongoDB
  * @param {String} idApartament id of the apartment to which you want to make the modification
  * @param {Object} comment  you can pass a single comment as an object or multiple comments in a text string concatenating each object or comment with a comma ','
  */
-apartmentSchema.statics.insertComment = async function (idApartament,comment) {
+apartmentSchema.statics.insertComment = async function (idApartament, idUser, comment) {
+    
+    let newComment = this.createComment(idUser, comment);
 
-    return await this.upDateApartment({ _id:idApartament },{$push:{comments:comment}});
+    return await this.upDateApartment({ _id:idApartament },{$push:{comments:newComment}});
 
 }//not checked , 80% seguridad
 
@@ -228,6 +266,13 @@ servicesSchema.statics.getAllServices = async function(searchCriteria = {}, want
 
 }
 
-exports.Apartment = mongoose.model('apartments', apartmentSchema, 'apartments');
+ exports.Apartment = mongoose.model('apartments', apartmentSchema, 'apartments');
 
-exports.Services = mongoose.model('services', servicesSchema, 'services');
+ //exports.Comments = mongoose.model('apartments', commentsSchema, 'apartments');
+
+
+ exports.Services = mongoose.model('services', servicesSchema, 'services');
+
+
+
+// module.exports = mongoose.model('apartments', apartmentSchema, 'apartments');

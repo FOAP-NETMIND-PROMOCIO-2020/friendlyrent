@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
+
+
 const commentsSchema = new mongoose.Schema({
     _id: false,
     comment: String,
@@ -73,5 +75,27 @@ userSchema.methods.generateHash = function(password) {
 userSchema.methods.validatePassword = function(password) {
     return bcrypt.compareSync(password, this.local.password); //compara la contraseña con la almacenada en la BBDD
 }
+
+userSchema.statics.writetMessages = async function (idOwner, idCustomer, comments) {
+        const filter = { _id: idCustomer };
+        let newComment = {
+        comment : comments,
+        user_id : idOwner,
+        creationDate : new Date().toLocaleDateString()
+    }
+
+    const update = { $push:{comments:newComment} };
+
+    console.log("que tiene update", update)
+
+    let x = await this.updateOne(filter, update ).catch(err=>{
+        console.log("Error", err)
+    })
+    
+    console.log("grabado", x);
+
+    
+}
+
 
 module.exports = mongoose.model('user', userSchema, 'user');
