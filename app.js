@@ -13,6 +13,8 @@ const session = require('express-session');
 const apartmentRoutes = require('./routes/apartmentRoutes');
 const bookingsRoutes = require('./routes/bookingsRoutes');
 
+const errorControllers = require('./controllers/errors');
+
 const { url } = require('./config/database');
 const { clear } = require('console');
 
@@ -51,6 +53,16 @@ require('./routes/userRoutes')(app, passport);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Errores 404 y 500
+app.use('/500', errorControllers.get500);
+app.use(errorControllers.get404); 
+
+// Gestión de errores para la inserción de una reserva (Bookings)
+app.use((err, req, res, next) => {
+    console.error("Ha ocurrido un error", err);
+    res.redirect('/500'); //Donde lo redireccionamos?? Al detalle del apartamento a una pàgina 500?
+})
 
 app.listen(app.get('port')), () => {
     console.log("server on port", app.get('port'));
