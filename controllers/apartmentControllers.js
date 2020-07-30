@@ -1,6 +1,7 @@
 const Services = require('../models/apartments').Services
 const Tools = require('../models/tools')
 const Apartment = require('../models/apartments').Apartment
+const User = require('../models/user')
 
 exports.getAllApartments = (req, res) => {
     res.render('index', {
@@ -61,4 +62,13 @@ exports.postNewApartment = async(req, res) => {
         res.send('Your apartment has not been saved'); 
     }
 
+}
+
+
+exports.postAJAXuser = async(req,res) => {
+
+    let x = await User.find({},{'local.email':1}).catch(err => console.log('error: -> ', err))    
+    console.log('------------------------------------',x);
+    res.send(x)
+    
 }
