@@ -64,9 +64,28 @@
      <script defer src="js/validator.js"></script>
 
  <style>
-     #mapid {
+     #mapHack {
          height: 360px; 
          width: 100%;
          
      }
+     /*------loading----------*/
+    
+    img.loadingAJAX {
+        width: 25vh;
+        animation: loading 3s infinite;
+        animation-timing-function: linear;
+    }
+    
+    div.loadingAJAX {
+        text-align: center;
+        background-color: #2b2b3187;
+        width: 100%;
+        padding: 3em;
+    }
+  
+  @keyframes loading {
+    0% {transform: rotate(360deg);}
+    100% {transform: rotate(0deg);}
+  }
  </style>

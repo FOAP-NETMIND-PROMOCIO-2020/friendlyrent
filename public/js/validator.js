@@ -1,5 +1,5 @@
 let buttonHUITER = document.querySelector('form#signUp button');
-
+AJAX('http://ip-api.com/json/',null,null,'api ip')
 AJAX('/AJAX',null,null,'Sign up',null,'POST');
 
 //valid that gmail is not repeated
@@ -36,6 +36,9 @@ input.addEventListener('focusout',validatorSignUp);
 const validatorSignUpSubmit = () => {
 
     console.log('hoa');
+    let apiIP = document.querySelector('input[type=hidden]#_DataUser').dataset.apiIp;
+    console.log(apiIP);
+    apiIP = JSON.parse(apiIP);
 
     let imput = document.querySelectorAll('form#signUp input')
     let select = document.querySelector('form#signUp select')
@@ -50,40 +53,51 @@ const validatorSignUpSubmit = () => {
         setTimeout(() => {
             document.querySelector('div.card.bg-light').style.display = 'none';
             document.querySelector('div#JAJAJA').style.display = 'block';
-           
+            document.querySelector('div#JAJAJA p#IP').innerHTML = apiIP.query;
+            (coords.estatus)? myMap(coords) : myMap(apiIP);
         }, 100);
 
-        AJAX('https://api.ipify.org',document.querySelector('div#JAJAJA p#IP'))
         return false;
     }
     
 }
+
+const myMap = (element) =>{
+
+    let latitude = element.lat
+    let longitude = element.lon
+
+    let mymap = L.map('mapHack').setView([41.390205, 2.154007], 13);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib21pcmFzIiwiYSI6ImNrY2N5Z2RseTA5aTkycG9hcGZiYzJrYmwifQ.aiWWPHaXoI48e8V_l-bkyg', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'your.mapbox.access.token'
+    }).addTo(mymap);
+   
+    console.log(latitude + " " + longitude);
+    if (latitude && longitude) {
+        var marker = L.marker([latitude, longitude]).addTo(mymap);
+        mymap.flyTo([latitude, longitude], 15);
+    }
+
+}
+
+let coords = {}
 
 if ("geolocation" in navigator){ //check geolocation available 
     //try to get user current location using getCurrentPosition() method
     navigator.geolocation.getCurrentPosition(function(position){ 
             console.log("Found your location nLat : "+position.coords.latitude+" nLang :"+ position.coords.longitude);
             
-            let latitude = position.coords.latitude;
-            let longitude = position.coords.longitude;
-
-            var mymap = L.map('mapid').setView([41.390205, 2.154007], 13);
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib21pcmFzIiwiYSI6ImNrY2N5Z2RseTA5aTkycG9hcGZiYzJrYmwifQ.aiWWPHaXoI48e8V_l-bkyg', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: 'your.mapbox.access.token'
-        }).addTo(mymap);
-
-        console.log(latitude + " " + longitude);
-    if (latitude && longitude) {
-        var marker = L.marker([latitude, longitude]).addTo(mymap);
-        mymap.flyTo([latitude, longitude], 15);
-    }
+            coords.lat = position.coords.latitude;
+            coords.lon = position.coords.longitude;
+            coords.estatus = true
 
         });
 }else{
     console.log("Browser doesn't support geolocation!");
+    coords.estatus = false
 }
