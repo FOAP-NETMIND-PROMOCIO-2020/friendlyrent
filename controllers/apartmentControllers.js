@@ -1,7 +1,7 @@
-const Services = require('../models/apartments').Services
+const Services = require('../models/apartments').Services;
 const Tools = require('../models/tools');
-const bookings = require('../models/bookings');
-const Apartment = require('../models/apartments').Apartment
+const Apartment = require('../models/apartments').Apartment;
+const User = require('../models/user');
 
 exports.getAllApartments = async (req, res) => {
     const maxPrice = req.query.maxPrice;
@@ -43,11 +43,41 @@ exports.getAllApartments = async (req, res) => {
 
 exports.getDetailedApartment = async (req, res) => {
 
+<<<<<<< HEAD
     let apartment = await Apartment.getOneApartment({ _id: req.params.idApartment })
 
     res.render('properties-single', {
         apartment: apartment
+=======
+    let apartment = await Apartment.getOneApartment({ _id: req.params.idApartment });
+    let canUserGiveComment = false;
+    
+    if (req.user) {
+        let idUser = req.user.identifUser;
+        let idApartment = req.params.idApartment;
+        canUserGiveComment = Apartment.canLeaveComment(idUser, idApartment);
+    } 
+
+    res.render('properties-single', {
+        apartment: apartment,
+        canUserGiveComment: canUserGiveComment
+
+>>>>>>> master
     });
+}
+
+exports.postCommentApartment = async (req, res) => {
+
+    let apartment = await Apartment.getOneApartment({ _id: req.params.idApartment });
+    let idApartment = apartment._id;  //OJO, verificar esto
+    let idCustomer = req.user._id;
+    let commentApartment = req.body.apartmentComment;
+
+    console.log("Datos: ", apartment, idApartment, commentApartment);
+    await Apartment.insertComment(idApartment, idCustomer, commentApartment);
+
+    res.redirect(`/apartment/${idApartment}`);
+
 }
 
 exports.postSignUp = (req, res) => {
