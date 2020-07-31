@@ -92,13 +92,14 @@ bookingsSchema.statics.getAllApartmentsUsrAnt = async function (id) {
  */
 
 bookingsSchema.statics.getAllApartmentsOwn = async function (id) {
-
     let resultado = await this.find().sort({idApartment:1}).populate({
         path: 'idApartment',
         match: { registerUser: id }
         // ,        select: 'description -_id'
-    });
-    console.log("que me sacas bookings", resultado);
+
+    }).populate('idUser');
+
+    console.log("----------- que me sacas bookings + usuario", resultado);
     return resultado;
 }
 
