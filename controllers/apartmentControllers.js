@@ -3,37 +3,68 @@ const Tools = require('../models/tools');
 const Apartment = require('../models/apartments').Apartment;
 const User = require('../models/user');
 
-exports.getAllApartments = (req, res) => {
-    
+exports.getAllApartments = async(req, res) => {
+    const maxPrice = req.query.maxPrice;
+    const city = req.query.city;
+    const bathrooms = req.query.bathrooms;
+    const rooms = req.query.rooms;
+    let searchCriteria = {};
+
+    if (maxPrice) {
+        searchCriteria["price"] = { $lte: maxPrice };
+    }
+
+    if (city) {
+        searchCriteria["location.city"] = { $eq: city }
+    }
+
+    if (bathrooms) {
+        searchCriteria["bathrooms"] = { $gte: bathrooms }
+    }
+
+    if (rooms) {
+        searchCriteria["rooms"] = { $gte: rooms }
+    }
+
+    const apartments = await Apartment.getAllAvailableApartmentsForBooking(searchCriteria);
+    console.log("Search criteria", searchCriteria);
+
+    //  tenemos que mirar lo de sacar solo los apartamentos que esten Disponibles.
+    // hay que buscar por idApartment los que tengan en la colection booking el requestStatus diferente de accepted
+    //var filter = [];
+    //const apartmentsAccepted = await bookings.find(apartments._id);
+    console.log('Que es esto: ', apartments)
+
     res.render('index', {
-        role: 'inquilino',
+        isCustomer: (req.user && req.user.identifUser == "customer"),
+        apartments: apartments,
         user: req.user
     });
 }
 
-exports.getDetailedApartment = async (req, res) => {
-    
+exports.getDetailedApartment = async(req, res) => {
+
     let apartment = await Apartment.getOneApartment({ _id: req.params.idApartment });
     let canUserGiveComment = false;
-    
+
     if (req.user) {
         let idUser = req.user.identifUser;
         let idApartment = req.params.idApartment;
         canUserGiveComment = Apartment.canLeaveComment(idUser, idApartment);
-    } 
+    }
 
     res.render('properties-single', {
         apartment: apartment,
-        canUserGiveComment: canUserGiveComment,
+        canUserGiveComment: (canUserGiveComment && req.user && req.user.identifUser == 'customer'),
         isLoggedUser: (req.user && req.user.identifUser == 'customer'),
         user: req.user
     });
 }
 
-exports.postCommentApartment = async (req, res) => {
+exports.postCommentApartment = async(req, res) => {
 
     let apartment = await Apartment.getOneApartment({ _id: req.params.idApartment });
-    let idApartment = apartment._id;  //OJO, verificar esto
+    let idApartment = apartment._id; //OJO, verificar esto
     let idCustomer = req.user._id;
     let commentApartment = req.body.apartmentComment;
 
@@ -55,7 +86,7 @@ exports.postSignUp = (req, res) => {
     });
 }
 
-exports.getNewApartment = async (req, res) => {
+exports.getNewApartment = async(req, res) => {
 
     if (req.user) {
         if (req.user.identifUser != 'owner') {
@@ -74,7 +105,7 @@ exports.getNewApartment = async (req, res) => {
 
 }
 
-exports.postNewApartment = async (req, res) => {
+exports.postNewApartment = async(req, res) => {
 
     if (!(req.user)) {
         res.send("you have to be logged in before inserting");

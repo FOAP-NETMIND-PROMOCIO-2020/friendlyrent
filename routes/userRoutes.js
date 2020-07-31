@@ -1,4 +1,6 @@
 const passport = require("passport");
+const Bookings = require('../models/bookings')
+const User = require('../models/user')
 
 module.exports = (app, passport) => {
 
@@ -35,12 +37,20 @@ module.exports = (app, passport) => {
         failureFlash: true
     }));
 
-    app.get('/profile', isLoggedIn, (req, res) => {  // impide acceder a los no logueados
+    app.get('/profile', isLoggedIn, async (req, res) => {  // impide acceder a los no logueados
+        
+        if(req.user && req.user.identifUser == "owner"){
+            
+            var apartmentOwner = await Bookings.getAllApartmentsOwn(req.user._id);
+             
+        }
+        
         res.render('profile', {
             user: req.user,     // aquí está la info del usuario
             isOwner: (req.user && req.user.identifUser == "owner"),
             isCustomer: (req.user && req.user.identifUser == "customer"),
             apartmentCustomer: [{
+                
                 title: "Platja D'Aro",
                 startDate: "2018-01-01",
                 endDate: "2020-01-01"
@@ -51,44 +61,11 @@ module.exports = (app, passport) => {
                 endDate: "2020-07-01"
             }
             ],
-            apartmentOwner: [
-                {
-                    title: "Palafurgell",
-                    customerData: [
-                        {
-                            userName: "Manolo",
-                            startDate: "2020-01-01",
-                            endDate: "2020-03-01"
-                        },
-                        {
-                            userName: "LauraDrums",
-                            startDate: "2020-03-02",
-                            endDate: "2020-05-05"
-                        }
-                    ]
-                },
-                {
-                    title: "Begur",
-                    customerData: [
-                        {
-                            userName: "Anna",
-                            startDate: "2020-01-01",
-                            endDate: "2020-03-01"
-                        },
-                        {
-                            userName: "Raul",
-                            startDate: "2020-03-02",
-                            endDate: "2020-05-05"
-                        },
-                        {
-                            userName: "Sergi",
-                            startDate: "2020-05-31",
-                            endDate: "2020-07-15"
-                        }
-                    ]
-                }
+            apartmentOwner: apartmentOwner 
                 
-            ]
+            
+                
+            
         });
     });
 
@@ -103,4 +80,21 @@ module.exports = (app, passport) => {
         }
         return res.redirect('/login');
     }
+
+    app.post('/add-comment', (req, res) => {
+        
+        res.render('add-comment', {
+            idUser: req.body.id_user,
+            idOwner: req.body.id_owner
+
+        })
+
+    })
+
+    app.post('/new-comment', async (req, res) => {
+        
+        await User.writetMessages(req.body.id_owner, req.body.id_user, req.body.comment);
+        res.redirect('/profile')
+       
+    });
 }
