@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add your comment</title>
+    <%- include ("partials/head.ejs") %>
+</head>
+
+<body class="signup">
+    <div class="container">
+        <div class="col-sm-6 mx-auto">
+            <div class="card mt-5">
+                <div class="card-body">
+                    
+
+                    
+                    <form action="/new-comment" method="POST">
+                        <div class="form-group">
+                            <label for="comment">Comment</label>
+                            <input class="form-control" type="text" name="comment" id="comment">
+
+                            <label for="id_owner"></label>
+                            <input type="hidden" value="<%= idOwner %>" name="id_owner" id="id_owner">
+
+                            <label for="id_user"></label>
+                            <input type="hidden" value="<%= idUser %>" name="id_user" id="id_user">
+
+                        </div>
+                        
+                        <input class="btn btn-dark btn-lg" type="submit">
+
+                    </form>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
