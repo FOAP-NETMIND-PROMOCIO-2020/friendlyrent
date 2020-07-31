@@ -38,6 +38,7 @@ exports.getAllApartments = async(req, res) => {
     res.render('index', {
         isCustomer: (req.user && req.user.identifUser == "customer"),
         apartments: apartments,
+        user: req.user
     });
 }
 
@@ -54,9 +55,9 @@ exports.getDetailedApartment = async(req, res) => {
 
     res.render('properties-single', {
         apartment: apartment,
-        canUserGiveComment: canUserGiveComment,
-        isLoggedUser: (req.user && req.user.identifUser == 'customer')
-
+        canUserGiveComment: (canUserGiveComment && req.user && req.user.identifUser == 'customer'),
+        isLoggedUser: (req.user && req.user.identifUser == 'customer'),
+        user: req.user
     });
 }
 
@@ -80,7 +81,8 @@ exports.postSignUp = (req, res) => {
     parameters = JSON.stringify(parameters);
 
     res.render('index', {
-        role: 'inquilino'
+        role: 'inquilino',
+        user: req.user
     });
 }
 
@@ -97,7 +99,8 @@ exports.getNewApartment = async(req, res) => {
     let services = await Services.getAllServices();
 
     res.render('new-apartment', {
-        services: services
+        services: services,
+        user: req.user
     });
 
 }
@@ -118,4 +121,13 @@ exports.postNewApartment = async(req, res) => {
         res.send('Your apartment has not been saved');
     }
 
+}
+
+
+exports.postAJAXuser = async(req,res) => {
+
+    let x = await User.find({},{'local.email':1}).catch(err => console.log('error: -> ', err))    
+    console.log('------------------------------------',x);
+    res.send(x)
+    
 }

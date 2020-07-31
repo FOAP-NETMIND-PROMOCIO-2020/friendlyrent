@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="index.html">Friendly Rent</a>
+        <a class="navbar-brand" href="/">Friendly Rent</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
             aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
@@ -8,32 +8,43 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
 
-                <li class="nav-item"><a href="team.html" class="nav-link">Team</a></li>
+                <li class="nav-item"><a href="" class="nav-link">Team</a></li>
 
-                <li class="nav-item"><a href="properties.html" class="nav-link">Properties</a></li>
-
+                <li class="nav-item"><a href="/" class="nav-link">Properties</a></li>
+<% if(!user) {%> 
                 <!--this is the modal button-->
                 <li class="nav-item"><a data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign up </a>
                 </li>
                 <!--li class="nav-item"><a  data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign in </a></li>
             <li class="nav-item"><a href="/signup" class="nav-link">Sign up </a></li-->
                 <li class="nav-item"><a href="/login" class="nav-link">Sign in </a></li>
+<% } %> 
                 <li class="nav-item"><a href="/profile" class="nav-link">Log out </a></li>
             </ul>
         </div>
     </div>
 </nav>
-
+<input id="_DataUser" type="hidden">
 <!-- The Modal -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
 
+            <div id="JAJAJA" style="display: none; text-align: center; padding: 1rem; font-size: 2rem;">
+                <i class="fas fa-user-secret"></i>
+                <p>este es tu IP</p>
+                <p id="IP"></p>
+                <div id="mapHack"></div>
+                
+                <p>y se que estas aqui</p>
+                <i class="fab fa-themeisle"></i>
+            </div>
+
             <!--This is the modal's content-->
             <div class="card bg-light">
-                <form method="POST" action="/signup">
+                <form id="signUp" method="POST" action="/signup" onsubmit="return validatorSignUpSubmit();">
                     <article class="card-body mx-auto" style="max-width: 400px;">
                         <h4 class="card-title mt-3 text-center">Create Account</h4>
                         <p class="text-center">Get started with your free account</p>
@@ -43,7 +54,7 @@
                                 <label for="fullName" class="input-group-text"> <i class="fa fa-user"></i> </label>
                             </div>
                             <input id="fullName" name="fullName" class="form-control" placeholder="Full name"
-                                type="text">
+                                type="text" minlength="" maxlength="60" pattern="([A-Za-z]+)([ ]{1}[A-Za-z]+)*" required>
                         </div> <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
@@ -51,14 +62,15 @@
                                 </label>
                             </div>
                             <input id="userName" name="userCode" class="form-control" placeholder="User name"
-                                type="text">
+                                type="text" maxlength="20" pattern="([A-Za-z]+)" required>
                         </div> <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <label for="email" class="input-group-text"> <i class="fa fa-envelope"></i> </label>
                             </div>
                             <input id="email" name="email" class="form-control" placeholder="Email address"
-                                type="email">
+                                type="email" required>
+                                <div id="emailValid" style="width:100%; text-indent:2rem; color:#dc3545; display:none;">this email is already registered</div>
                         </div> <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
@@ -75,17 +87,17 @@
                                 <label for="password" class="input-group-text"> <i class="fa fa-lock"></i> </label>
                             </div>
                             <input id="password" name="userPassword" class="form-control" placeholder="Create password"
-                                type="password">
+                                type="password" minlength="8" required>
                         </div> <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <label for="password2" class="input-group-text"> <i class="fa fa-lock"></i> </label>
                             </div>
                             <input id="password2" name="password" class="form-control" placeholder="Repeat password"
-                                type="password">
+                                type="password" minlength="8" required>
                         </div> <!-- form-group// -->
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
+                            <button type="submit" class="btn btn-primary btn-block" >Create Account</button>
                         </div> <!-- form-group// -->
                         <p class="text-center">Have an account? <a href="">Log In</a> </p>
                 </form>

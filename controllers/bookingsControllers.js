@@ -24,7 +24,8 @@ exports.getNewRental  =  async (req, res) => {
     res.render('newbooking', {
         apartment: apartment,
         currentDate: currentDate,
-        userID: req.user._id
+        userID: req.user._id,
+        user: req.user
     });
 }
 

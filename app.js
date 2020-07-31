@@ -25,6 +25,7 @@ mongoose.connect(url, {
 })
 require('./config/passport')(passport);
 
+
 // server variables
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views')); //da la dirección de la carpeta views
