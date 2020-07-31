@@ -11,7 +11,8 @@ module.exports = (app, passport) => {
             return res.redirect('/');
         }
         res.render('login', {
-            message: req.flash('loginMessage')  //mensaje desde la misma vista
+            message: req.flash('loginMessage'),  //mensaje desde la misma vista
+            user: req.user
         });
     });
 
@@ -23,7 +24,8 @@ module.exports = (app, passport) => {
 
     app.get('/signup', (req, res) => {
         res.render('signup', {
-            message: req.flash('signupMessage')
+            message: req.flash('signupMessage'),
+            user: req.user
         });
     })
 
