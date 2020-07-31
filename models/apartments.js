@@ -132,9 +132,12 @@ apartmentSchema.statics.getAllApartments = async function (searchCriteria = {}, 
  * It brings you all the apartments where ‘unsubscribeDate’ and ‘idBooking’ are not under siege
  * @param {Number} num Query limiter
  */
-apartmentSchema.statics.getAllAvailableApartmentsForBooking = async function(num='') {
+apartmentSchema.statics.getAllAvailableApartmentsForBooking = async function(searchCriteria = {}, num='') {
 
-    return await this.find({$and:[{unsubscribeDate:''},{idBooking:''}]}).populate('services').populate('comments.user_id').limit(num);
+    const query = {$and:[searchCriteria, {unsubscribeDate:''},{idBooking:''}]};
+    console.log("Query a base de datos", query);
+
+    return await this.find({$and:[searchCriteria, {unsubscribeDate:''},{idBooking:''}]}).populate('services').populate('comments.user_id').limit(num);
 
 }
 
