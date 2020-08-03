@@ -1,9 +1,10 @@
 let buttonHUITER = document.querySelector('form#signUp button');
+let imput = document.querySelectorAll('form#signUp input')
 AJAX('http://ip-api.com/json/',null,null,'api ip')
 AJAX('/AJAX',null,null,'Sign up',null,'POST');
 
 //valid that gmail is not repeated
-const validatorSignUp = () => {
+const validatorSignUp = (x) => {
 
     let CSSinput = `padding-right: calc(1.5em + .75rem) !important;
     background-repeat: no-repeat !important;
@@ -15,23 +16,39 @@ const validatorSignUp = () => {
     User = JSON.parse(User);
     let inputEmail = document.querySelector('form#signUp input[type=email]')
     
-    if(User.some(element => (element.local.email == inputEmail.value))) { 
-        //console.log('si');
-        inputEmail.style = CSSinput + `background-image: url(images/close.png) !important; border-color: #dc3545;`
-        document.querySelector('form#signUp div#emailValid').style.display = 'block'
-        buttonHUITER.disabled = true
-    }else if(inputEmail.value != '') {
-        //console.log('no');
-        inputEmail.style = CSSinput //+ `background-image: url(images/check.png) !important; border-color: #28a745;`
-        document.querySelector('form#signUp div#emailValid').style.display = 'none'
-        buttonHUITER.disabled = false
+    if (x.target == inputEmail) {
+        if(User.some(element => (element.local.email == inputEmail.value))) { 
+            //console.log('si');
+            inputEmail.style = CSSinput + `background-image: url(images/close.png) !important; border-color: #dc3545;`
+            document.querySelector('form#signUp div#emailValid').style.display = 'block'
+            buttonHUITER.disabled = true
+        }else if(inputEmail.value != '') {
+            //console.log('no');
+            inputEmail.style = CSSinput //+ `background-image: url(images/check.png) !important; border-color: #28a745;`
+            document.querySelector('form#signUp div#emailValid').style.display = 'none'
+            buttonHUITER.disabled = false
+        }
+    } else {
+        if (imput[3].value != imput[4].value){
+            imput[4].style = CSSinput + `background-image: url(images/close.png) !important; border-color: #dc3545;`
+            imput[3].style.borderColor = '#dc3545'
+            document.querySelector('form#signUp div#passwordValid').style.display = 'block'
+            buttonHUITER.disabled = true
+        }else{
+            imput[4].style = CSSinput + `border-color: none;`
+            imput[3].style = ' border-color: none'
+            document.querySelector('form#signUp div#passwordValid').style.display = 'none'
+            buttonHUITER.disabled = false
+        }
     }
+   
 
 }
 
 let input = document.querySelector('form#signUp input[type=email]')
 input.addEventListener('focusout',validatorSignUp);
-
+let inputPass = document.querySelector('form#signUp input#password2')
+inputPass.addEventListener('focusout',validatorSignUp);
 
 const validatorSignUpSubmit = () => {
 
@@ -40,7 +57,6 @@ const validatorSignUpSubmit = () => {
     console.log(apiIP);
     apiIP = JSON.parse(apiIP);
 
-    let imput = document.querySelectorAll('form#signUp input')
     let select = document.querySelector('form#signUp select')
     const html = document.querySelector('#aj')
     let namImp = []//imput.map(element => element.name)
@@ -58,6 +74,17 @@ const validatorSignUpSubmit = () => {
         }, 100);
 
         return false;
+    }
+
+    if (imput[3].value != imput[4].value){
+        imput[4].style = CSSinput + `background-image: url(images/close.png) !important; border-color: #dc3545;`
+        imput[3].style.borderColor = '#dc3545'
+        document.querySelector('form#signUp div#passwordValid').style.display = 'block'
+        return false;
+    }else{
+        imput[4].style = CSSinput + `border-color: none;`
+        imput[3].style = ' border-color: none'
+        document.querySelector('form#signUp div#passwordValid').style.display = 'none'
     }
     
 }
