@@ -6,7 +6,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
-const morgan = require('morgan');
+//const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyparser = require('body-parser');
 const session = require('express-session');
@@ -21,18 +21,26 @@ const { clear } = require('console');
 // Connection to DDBB
 mongoose.connect(url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true    
+    useUnifiedTopology: true,
+    connectTimeoutMS: 5000,    
 })
+.then((res) => {
+    app.listen(process.env.PORT || 3000); // sustituye al listen(3000)
+    console.log("Conexión con la BBDD");
+  })
+  .catch((err) => {
+    console.log("Error al conectar a la base de datos:", err);
+  });
+
 require('./config/passport')(passport);
 
 
 // server variables
-app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views')); //da la dirección de la carpeta views
 app.set('view engine', 'ejs');
 
 // middleware
-app.use(morgan('dev'));
+//app.use(morgan(process.env.NODE_ENV));
 app.use(cookieParser());  //administra cookies
 app.use(bodyparser.urlencoded({extended: false}));  //info interpretable a través de la url
 app.use(session({
