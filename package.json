@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "debug": "DEBUG=* nodemon app.js"
+    "debug_windows": "SET DEBUG=* nodemon app.js"
   },
   "author": "",
   "license": "ISC",
