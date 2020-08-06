@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./user');
-const Bookings = require('./bookings');
+
 
 const Schema = mongoose.Schema;
 
@@ -27,6 +27,12 @@ const commentsSchema = Schema({
 })
 
 const apartmentSchema = new Schema({
+
+   apartamentos: {
+     type:  mongoose.Schema.Types.ObjectId,
+     ref: "bookings"
+   },
+   
     title: {
         type: String,
         required: true
@@ -124,6 +130,16 @@ const servicesSchema = new Schema({
 apartmentSchema.statics.getAllApartments = async function (searchCriteria = {}, wantedField = {}, num = '') {
 
     return await this.find(searchCriteria, wantedField).populate('services').populate('comments.user_id').limit(num);
+
+}
+
+//---------------------------pruyeba------------------------
+ 
+apartmentSchema.statics.getAllApartmentsOwn = async function (id) {
+
+
+
+    return await this.find({registerUser: "5f0de740b50f726b21f06cc5"}).populate('apartamentos');
 
 }
 

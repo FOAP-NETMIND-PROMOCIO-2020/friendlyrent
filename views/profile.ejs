@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <%- include ("partials/head.ejs") %>
 
 </head>
+
 <body>
     <%- include('partials/header'); %>
     <div class="container">
@@ -25,15 +27,15 @@
                         <p>
                             <strong>id</strong>: <%= user._id %> <br>
                             <strong>email</strong>: <%= user.local.email %> <br>
-                            <strong>password</strong>: <%= user.local.password %> 
+                            <strong>password</strong>: <%= user.local.password %>
                         </p>
                         <a href="/logout" class="btn btn-light">Logout</a>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Mostrar Tablas perfil cliente y propietario-->
     <div class="container">
         <% if (isCustomer) { %>
@@ -71,7 +73,7 @@
             <p>List of rented apartments:</p>
             <br>
             <!-- console.log("vista renderizada", apartmentOwner) %>  -->
-            
+
             <br>
             <table class="table table-bordered">
                 <thead>
@@ -89,21 +91,45 @@
                         <td><%= apartmentOwner[x].idUser.fullName %></td>
                         <td><%= apartmentOwner[x].contractStartDate %></td>
                         <td><%= apartmentOwner[x].contractEndPlannedDate %></td>
-                        <td> <form action="/add-comment" method="POST">
-                            <label for="id_owner"></label>
-                            <input type="hidden" value="<%= apartmentOwner[x].idApartment.registerUser %>" name="id_owner" id="id_owner">
+                        <td>
+                            <form action="/add-comment" method="POST">
+                                <label for="id_owner"></label>
+                                <input type="hidden" value="<%= apartmentOwner[x].idApartment.registerUser %>"
+                                    name="id_owner" id="id_owner">
 
-                            <label for="id_user"></label>
-                            <input type="hidden" value="<%= apartmentOwner[x].idUser._id %>" name="id_user" id="id_user">
+                                <label for="id_user"></label>
+                                <input type="hidden" value="<%= apartmentOwner[x].idUser._id %>" name="id_user"
+                                    id="id_user">
 
-                            <input class="btn btn-dark btn-lg" value="Inserta comentario" type="submit"> 
-                            </form> </td>
+                                <input class="btn btn-dark btn-lg" value="Inserta comentario" type="submit">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/rejected" method="POST">
+
+                                <label for="id_booking"></label>
+                                <input type="hidden" value="<%= apartmentOwner[x]._id %>" name="id_booking"
+                                    id="id_booking">
+
+                                <input class="btn btn-danger btn-lg" value="Rechazar" type="submit">
+                            </form>
+                        </td>
+                           <td>
+                            <form action="/accepted" method="POST">
+
+                                <label for="id_booking"></label>
+                                <input type="hidden" value="<%= apartmentOwner[x]._id %>" name="id_booking"
+                                    id="id_booking">
+
+                                <input class="btn btn-success btn-lg" value="Aceptar" type="submit">
+                            </form>
+                        </td>
                     </tr>
                     <% } %>
                 </tbody>
             </table>
             <br>
-            
+
         </div>
 
         <% } %>
@@ -111,4 +137,5 @@
     </div>
 
 </body>
+
 </html>

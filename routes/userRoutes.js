@@ -1,6 +1,7 @@
 const passport = require("passport");
 const Bookings = require('../models/bookings')
 const User = require('../models/user')
+const Apartments = require('../models/apartments').Apartment
 
 module.exports = (app, passport) => {
 
@@ -41,7 +42,8 @@ module.exports = (app, passport) => {
         
         if(req.user && req.user.identifUser == "owner"){
             
-            var apartmentOwner = await Bookings.getAllApartmentsOwn(req.user._id);
+            var apartmentOwner = await Apartments.getAllApartmentsOwn(req.user._id);
+            console.log("--------Que hay de mis apartamentos", apartmentOwner)
              
         }
         
@@ -94,6 +96,20 @@ module.exports = (app, passport) => {
     app.post('/new-comment', async (req, res) => {
         
         await User.writetMessages(req.body.id_owner, req.body.id_user, req.body.comment);
+        res.redirect('/profile')
+       
+    });
+
+    app.post('/rejected', async (req, res) => {
+        
+        await User.writetMessages(req.body.id_owner, req.body.id_user, req.body.comment);
+        res.redirect('/profile')
+       
+    });
+
+    app.post('/accepted', async (req, res) => {
+        
+        await Bookings.setRequestStatusToAccept(req.body.id_booking);
         res.redirect('/profile')
        
     });

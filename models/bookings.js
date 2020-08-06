@@ -165,16 +165,24 @@ bookingsSchema.statics.setRequestStatusToAccept = async function (idBooking) {
     await targetBooking.save( function(err) {
         if (err) { throw err; }
         console.log("Hemos cambiado el valor a accepted", targetBooking.idApartment);
+        
     });
-    const filter = {$and:[{idApartment: targetBooking.idApartment}, { requestStatus: "pending" }]};
-    console.log(filter);
-    let x = await this.updateMany(filter, {requestStatus: "rejected"}).catch(err=>{
-        console.log("Error", err)
-    });
-    console.log("grabado", x);
+
+    setRequestStatusToRejected (targetBooking.idApartment);
+
+
 }
 
+bookingsSchema.statics.setRequestStatusToRejected = async function (idApartment) {
+const filter = {$and:[{idApartment: idApartment}, { requestStatus: "pending" }]};
+console.log(filter);
+let x = await this.updateMany(filter, {requestStatus: "rejected"}).catch(err=>{
+    console.log("Error", err)
+});
 
+console.log("grabado", x);
+
+}
 //------------------------------------------------------------------
 
 
