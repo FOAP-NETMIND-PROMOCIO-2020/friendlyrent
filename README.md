@@ -1,3 +1,6 @@
+[![Code Grade](https://www.code-inspector.com/project/11943/score/svg)](https://www.code-inspector.com)
+
+
 # Bienvenidos a FriendlyRent
 
 Aplicación Web para la gestión de alquileres entre inquilinos y propietarios.
