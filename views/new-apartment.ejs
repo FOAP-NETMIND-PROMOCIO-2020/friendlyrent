@@ -4,7 +4,8 @@
     <%- include('partials/head'); %>
     <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    
+<link rel="stylesheet" href="/css/chosen.min.css">
+<script src="/js/pselect.js" ></script>
     <title>Add new apartment</title>
     
 </head>
@@ -36,7 +37,7 @@
            
         
     <!-- contenedor form -->
-    <form method="POST" action="/new-apartment" class="container">
+    <form method="POST" action="/new-apartment" class="container" enctype="multipart/form-data">
         <!-- primera fila -->
         <div class="row">
             <div class="form-group col-sm">
@@ -82,7 +83,7 @@
 
             <div class="form-group col-sm">
                 <label for="">Apartment size</label>
-                <input type="number" class="form-control" name="squareMeters" id="squareMeters" required>
+                <input type="number" class="form-control" min="1" name="squareMeters" id="squareMeters" required>
             </div>
         </div>
         
@@ -97,12 +98,15 @@
 
             <div class="form-group col-sm">
                 <label for="">Province</label>
-                <input type="text" class="form-control" name="province" id="province" required>
+                <select id="province" class="form-control" name="province" required>
+                </select>
+                <!--<input type="text" class="form-control" name="province" id="province" required>-->
             </div>
 
             <div class="form-group col-sm">
                 <label for="">Address</label>
-                <input type="text" class="form-control" name="address" id="address" required>
+                <select id="address" class="form-control" name="address" required></select>
+                <!-- <input type="text" class="form-control" name="address" id="address" required> -->
             </div>
             
             <!-- GPS -->
@@ -125,7 +129,7 @@
 
             <div class="form-group col-sm">
                 <label for="">Price</label>
-                <input type="number" class="form-control" name="price" id="price" required>
+                <input type="number" class="form-control" min="1" name="price" id="price" required>
             </div>
        
             <div class="form-group col-sm">
@@ -189,22 +193,22 @@
                 <div class="row">
             <div class="form-group col-sm">
                 <label for="">Main photo</label>
-                <input type="url" class="form-control" name="mainPhotoUrl" id="mainPhoto-url" required>
+                <input type="file" class="form-control" name="photo" id="mainPhoto-url" required>
             </div>
 
             <div class="form-group col-sm">
                 <label for="">Photo 2</label>
-                <input type="url" class="form-control" name="photo2" id="photo-2" required>
+                <input type="file" class="form-control" name="photo" id="photo-2" required>
             </div>
             
             <div class="form-group col-sm">
                 <label for="">Photo 3</label>
-                <input type="url" class="form-control" name="photo3" id="photo-3" required>
+                <input type="file" class="form-control" name="photo" id="photo-3" required>
             </div>
             
             <div class="form-group col-sm">
                 <label for="">Photo 4</label>
-                <input type="url" class="form-control" name="photo4" id="photo-4" required>
+                <input type="file" class="form-control" name="photo" id="photo-4" required>
             </div>
         </div>
 
@@ -220,5 +224,19 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+     <script src="/js/chosen.jquery.min.js" type="text/javascript"></script>
+     <script src="/js/init.js" type="text/javascript" charset="utf-8"></script> 
+     <script defer>
+        //api Province and Address
+        let prov = $('#province')[0] || document.getElementById('province');
+        let mun = $('#address')[0] || document.getElementById('address');
+        // Create PS
+        new Pselect({provText:'Province',munText:'Address'}).create(prov, mun);
+        
+        $("select#services.form-control").chosen({no_results_text: "Oops, nothing found!"}); 
+         
+        $('ul.chosen-choices').addClass('form-control')
+     </script>
 </body>
 </html>
