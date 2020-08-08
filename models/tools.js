@@ -7,7 +7,7 @@ module.exports = class tools {
      * @param {Object} parameters This is an object that comes from the form
      * @param {String} idUser This is the User id
      */
-    static constructorApartment = async(parameters,idUser) => {
+    static constructorApartment = async(parameters,idUser,photos) => {
 
         let objectApartment = {
 
@@ -26,19 +26,19 @@ module.exports = class tools {
             photos:[
                 {
                     title:parameters.mainPhoto,
-                    url:parameters.mainPhotoUrl
+                    url:'/uploads/'+photos[0].filename
                 },
                 {
                     title:parameters.titlePhoto2,
-                    url:parameters.photo2
+                    url:'/uploads/'+photos[1].filename
                 },
                 {
                     title:parameters.titlePhoto3,
-                    url:parameters.photo3
+                    url:'/uploads/'+photos[2].filename
                 },
                 {
                     title:parameters.titlePhoto4,
-                    url:parameters.photo4
+                    url:'/uploads/'+photos[3].filename
                 }
             ],
             services:[],
