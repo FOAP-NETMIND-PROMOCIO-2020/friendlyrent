@@ -24,7 +24,10 @@
           <div class="text">
             <h1 class="mb-4">Find out <br></h1>
             <p style="font-size: 18px;"></p>
-            <p><a href="#" class="btn btn-primary py-3 px-4">View all properties</a></p>
+            <p><a href="#properties" class="btn btn-primary py-3 px-4">View all properties</a></p>
+            <% if (isOwner) { %>
+              <p><a href="/new-apartment" class="btn btn-primary py-3 px-4">Add property</a></p>
+            <% } %>
           </div>
         </div>
       </div>
@@ -36,25 +39,25 @@
       <div class="mt-3 row">
         <!-- <div class=""> si comento esto aparecen al lado -->
         <div class="form-group">
-          <label for="maxPrice">Precio Máximo por mes</label>
+          <label for="maxPrice">Maximum Price per month</label>
           <input class="form-control" type="number" name="maxPrice" id="maxPrice" min="1" max="9000" pattern="[0-9]">
         </div>
         <div class="form-group ml-3">
-          <label for="city">Población</label>
+          <label for="city">City</label>
           <input class="form-control" type="text" name="city" id="city" pattern="[A-Za-z ']*">
         </div>
         <div class="form-group ml-3">
-          <label for="pax">Capacidad</label>
+          <label for="pax">Capacity</label>
           <input class="form-control" type="number" name="pax" id="pax" min="1" max="20" pattern="[0-9]">
         </div>
         <div class="form-group ml-3">
-          <label for="rooms">Número de habitaciones (mínimo)</label>
+          <label for="rooms">Number of rooms (minimum)</label>
           <input class="form-control" type="number" name="rooms" id="rooms" min="1" max="5" pattern="[0-9]">
         </div>
         <div class="form-group ml-3">
           <label for="buscar">&nbsp;</label>
 
-          <input id="buscar" class="form-control" type="submit"
+          <input id="buscar" class="form-control" type="submit" value="Find"
             style="width: 100px; background-color: #24A148 !important; color: white !important">
         </div>
       </div>
@@ -71,7 +74,7 @@
       <div class="row justify-content-center">
         <div class="col-md-12 heading-section text-center ftco-animate mb-5">
           <span class="subheading">What we offer</span>
-          <h2 class="mb-2">Featured Properties</h2>
+          <h2 class="mb-2" id="properties">Featured Properties</h2>
         </div>
       </div>
       <div class="row ftco-animate">
@@ -89,9 +92,8 @@
                   <div class="rent-sale">
                     <!-- Hacedme un condicional con EJS , de manera que si la varialbe 'role' vale 'inqulino' aparece el botón. Convertid el Span en un tipo botton o al menos metedle un <a>. -->
                     <% if (isCustomer) { %>
-                    <span class="rent">Alquilar</span>
+                    <span class="rent">Rent</span>
                     <%  }  %>
-
                   </div>
                   <!-- Aquí hemos introducido el precio mensual del apartamento -->
                   <p class="price"><span class="orig-price"><%= apartment.price %> <small> / mo</small></span></p>
