@@ -38,9 +38,9 @@
     <%- include('partials/header'); %>
 
         <!-- END nav -->
-        <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <!-- <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
-            <div class="container">
+             <div class="container">
                 <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
                     <div class="col-md-9 ftco-animate pb-0 text-center">
                         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
@@ -49,10 +49,11 @@
                             <span>Properties Single <i class="fa fa-chevron-right"></i></span></p>
                         <h1 class="mb-3 bread">Property Details</h1>
                     </div>
-                </div>
-            </div>
-        </section>
+                </div> 
+            </div> 
+        </section>  -->
 
+        
 
         <section class="ftco-section ftco-property-details">
             <div class="container">
@@ -89,40 +90,41 @@
                                 </a>
 
                             </div>
-
+                            <!--
+                                Description card
+                            -->
                             <div class="row">
-
-                                <div class="text col-md-4">
+                                <div class="text card-header col-md-4  text-center">
                                     <span class="subheading"><%= apartment.location.city %></span>
-                                    <h2>
+                                    <h2 class="card-title text-success">
                                         <%= apartment.title %>
                                     </h2>
-                                    <h4>Address
-                                        <%= apartment.location.address %>
-                                    </h4>
-                                    <h4>City
-                                        <%= apartment.location.city %>
-                                    </h4>
-                                    <h4>Province
-                                        <%= apartment.location.province %>
-                                    </h4>
-                                    <h4 data-latitude="<%= apartment.location.gps[0]%>" data-longitude="<%= apartment.location.gps[1]%>">
+                                    <h4><i class="fa fa-map fa-sm"></i> Address </h4>
+                                        <p class="text-muted"><%= apartment.location.address %></p>
+                                    
+                                    <h4><i class="fa fa-map-signs"></i> City </h4>
+                                        <p class="text-muted"><%= apartment.location.city %></p>
+                                    
+                                    <h4><i class="fa fa-globe"></i> Province </h4>
+                                        <p class="text-muted"><%= apartment.location.province %></p>
+                                        
+                                        <h4 data-latitude="<%= apartment.location.gps[0]%>" data-longitude="<%= apartment.location.gps[1]%>">
                                         </data-longitude>Location</h4>
-                                    <h6> Latitude
+                                        <h6> Latitude
                                         <%= apartment.location.gps[0]%> Longitude
                                             <%= apartment.location.gps[1]%>
-                                    </h6>
-                                    <% if (isLoggedUser) { %>
+                                        </h6>
+                                        <% if (isLoggedUser) { %>
                                         <a href="/new-booking/<%= apartment._id %>"><button class="btn btn-dark"
-									type="button">Rent</button></a>
+                                        type="button">Rent</button></a>
                                         <% } %>
-                                </div>
+                            </div>
 
 
                                 <!-- Map api beginning-->
 
                                 <div class="col-md-8">
-                                    <div id="mapid"></div>
+                                    <div id="mapid" style="z-index: -1;"></div>
                                     <script>
                                         var mymap = L.map('mapid').setView([41.390205, 2.154007], 13);
                                         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib21pcmFzIiwiYSI6ImNrY2N5Z2RseTA5aTkycG9hcGZiYzJrYmwifQ.aiWWPHaXoI48e8V_l-bkyg', {

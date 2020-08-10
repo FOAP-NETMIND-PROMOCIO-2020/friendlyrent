@@ -123,6 +123,10 @@ exports.postNewApartment = async(req, res) => {
 
 }
 
+exports.resetApartmentQuery = async(req,res) => {
+    res.redirect('index');
+}
+
 
 exports.postAJAXuser = async(req,res) => {
 

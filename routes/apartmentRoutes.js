@@ -7,7 +7,7 @@ const apartmentControllers = require('../controllers/apartmentControllers');
 
 router.get('/', apartmentControllers.getAllApartments);
 router.get('/new-apartment',isLoggedIn, apartmentControllers.getNewApartment);
-
+router.get('/reset', apartmentControllers.resetApartmentQuery);
 router.post('/new-apartment',isLoggedIn, apartmentControllers.postNewApartment);
 
 router.post("/post-register-new-user", apartmentControllers.postSignUp);
