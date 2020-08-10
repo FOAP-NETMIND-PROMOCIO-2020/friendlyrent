@@ -9,10 +9,13 @@ const apartmentControllers = require('../controllers/apartmentControllers');
 
 router.get('/', apartmentControllers.getAllApartments);
 router.get('/new-apartment',isLoggedIn, apartmentControllers.getNewApartment);
+<<<<<<< HEAD
+
 router.post('/new-apartment',isLoggedIn,cpUpload,apartmentControllers.postNewApartment);
+=======
 router.get('/reset', apartmentControllers.resetApartmentQuery);
 router.post('/new-apartment',isLoggedIn, apartmentControllers.postNewApartment);
-
+>>>>>>> issue-55b
 
 router.post("/post-register-new-user", apartmentControllers.postSignUp);
 
