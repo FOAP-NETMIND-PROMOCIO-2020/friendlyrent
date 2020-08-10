@@ -173,9 +173,6 @@
                                     <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Features</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Description</a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Review</a>
                                 </li>
                             </ul>
@@ -184,47 +181,49 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-1">
                                         <ul class="features">
-                                            <li class="check"><span class="fa fa-check-circle"></span>Square Metres
-                                                <%= apartment.squareMetres %>
+                                            <li class=""><span class="fa fa-expand" aria-hidden="true"></span>
+                                                <%= apartment.squareMeters %>
                                             </li>
-                                            <li class="check"><span class="fa fa-check-circle"></span>Bedrooms
+                                            <li class=""><span class="fa fa-bed" aria-hidden="true"></span>
                                                 <%= apartment.rooms %>
                                             </li>
-                                            <li class="check"><span class="fa fa-check-circle"></span>Bathrooms
+                                            <li class=""><span class="fa fa-bath" aria-hidden="true"></span>
                                                 <%= apartment.bathrooms %>
                                             </li>
-
+                                            
                                         </ul>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <ul class="features">
                                             <% for (let i = 0; i< apartment.services.length; i++) { %>
-                                                <li class="check"><span class="fa fa-check-circle"></span>
-                                                    <%= apartment.services[i].codeService %>
-                                                        <span class="<%= apartment.services[i].iconService %>"></span></li>
+                                                <li class=""><span class="<%= apartment.services[i].iconService %>"></span>
+                                                     <%= apartment.services[i].codeService %>
+                                                        </li>
 
                                                 <%}	%>
                                         </ul>
                                     </div>
-
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-                                <% if (apartment.description) { %>
-                                    <p>
-                                        <%=apartment.description %>
-                                    </p>
-                                    <% } %>
-
-                                        <% if (apartment.terms) { %>
-                                            <h4>Terms: </h4>
+                                    
+                                    <div class="col-md-4" id="" role="" aria-labelledby="">
+                                        <% if (apartment.description) { %>
+                                            <h4>Description:</h4>
                                             <p>
-                                                <%=apartment.terms %>
+                                                <%=apartment.description %>
                                             </p>
                                             <% } %>
+                                    </div>
+                                    <div class="col-md-4">
+                                                <% if (apartment.terms) { %>
+                                                    <h4>Terms: </h4>
+                                                    <p>
+                                                        <%=apartment.terms %>
+                                                    </p>
+                                                    <% } %>
+                                    </div>
+
+                                </div>
                             </div>
 
                             <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
