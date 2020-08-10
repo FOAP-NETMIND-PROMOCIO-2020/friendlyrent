@@ -14,11 +14,13 @@ Aplicación Web para la gestión de alquileres entre inquilinos y propietarios.
 ## Construido con 🛠️
 
 * [Express](https://www.npmjs.com/package/express) - Framework NodeJS
+* Multer y Chosen, para la gestión de subida de ficheros. [Aquí](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/issues/57#issuecomment-670831268) explicamos como lo hemos implementado en nuestro proyecto. 
 
 
 ## Wiki 📖
 
 Puedes encontrar información de cómo hemos llevado a cabo este proyecto en [Wiki](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/wiki)
+
 
 ## Autores ✒️
 
