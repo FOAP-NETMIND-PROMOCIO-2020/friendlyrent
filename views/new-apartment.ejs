@@ -91,10 +91,6 @@
         <div class="row">
             
             <!-- Location -->
-            <div class="form-group col-sm">
-                <label for="">City</label>
-                <input type="text" class="form-control" name="city" id="city" required>
-            </div>
 
             <div class="form-group col-sm">
                 <label for="">Province</label>
@@ -104,9 +100,15 @@
             </div>
 
             <div class="form-group col-sm">
+                <label for="">City</label>
+                <select id="city" class="form-control" name="city" required></select>
+            </div>
+
+           
+
+            <div class="form-group col-sm">
                 <label for="">Address</label>
-                <select id="address" class="form-control" name="address" required></select>
-                <!-- <input type="text" class="form-control" name="address" id="address" required> -->
+                <input type="text" class="form-control" name="address" id="address" required>
             </div>
             
             <!-- GPS -->
@@ -230,9 +232,9 @@
      <script defer>
         //api Province and Address
         let prov = $('#province')[0] || document.getElementById('province');
-        let mun = $('#address')[0] || document.getElementById('address');
+        let mun = $('#city')[0] || document.getElementById('city');
         // Create PS
-        new Pselect({provText:'Province',munText:'Address'}).create(prov, mun);
+        new Pselect({provText:'Province',munText:'City'}).create(prov, mun);
         
         $("select#services.form-control").chosen({no_results_text: "Oops, nothing found!"}); 
          
