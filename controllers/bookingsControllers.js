@@ -37,9 +37,6 @@ exports.postNewRental = (req, res, next) => {
     const rentalPrice = req.body.rentalPrice;
     
     // Obtener/Calcular la fecha de planificación de fin de contrato (Hemos tenido que instalar "moment")
-        //PONERLO en los comentarios en el GidHub o como explicación en la wiki!!!!!!
-        //https://momentjscom.readthedocs.io/en/latest/moment/03-manipulating/01-add/
-        //https://stackoverflow.com/questions/39844746/moment-js-add-month-is-not-working/40601933
     const plannedDate = moment(rentalStartDate).add(rentalTime, 'M').format("YYYY-MM-DD");
     
     const newRental = new Bookings({
@@ -61,7 +58,6 @@ exports.postNewRental = (req, res, next) => {
     })
     .catch ( err => {
         console.log("Error!!", err); 
-        return next(err); // Es necesario este RETURN???????????
-        //res.send("Ha ocurrido un error!!");     
+        return next(err);
     })
 }
