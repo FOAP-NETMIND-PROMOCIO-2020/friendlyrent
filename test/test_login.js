@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer');
 const assert = require('assert');
 const mongoose = require('mongoose');
 const Apartment = require('../models/apartments').Apartment;
@@ -13,7 +13,7 @@ let connection;
 beforeEach(async function () {
     this.timeout(12000);
 
-    browser = await puppeteer.launch()
+    browser = await puppeteer.launch();
     const context = browser.defaultBrowserContext();
     await context.overridePermissions('http://localhost:3000/', ['geolocation']);
     page = await browser.newPage();
@@ -28,41 +28,41 @@ describe('Hacer login, usuario correcto', () => {
     it('Poner las credenciales correctas de un usuario; inicia sessión de manera correcta.', async () => {
 
         //    en login.ejs evaluar valor de 'message' o del input "btn"
-        await page.goto('http://localhost:3000/login', { waitUntil: 'networkidle2' })
+        await page.goto('http://localhost:3000/login', { waitUntil: 'networkidle2' });
 
         //    Escribir el mail
-        const email = await page.$('form[action="/login"] #email')
+        const email = await page.$('form[action="/login"] #email');
         await email.type("lauratama84@gmail.com");
 
         //    Escribir password
-        const password = await page.$('form[action="/login"] #password')
+        const password = await page.$('form[action="/login"] #password');
         await password.type("huiter123");
 
-        await page.click('input.btn')
-        const divEncontrado = await page.waitForSelector('section.hero-wrap')
+        await page.click('input.btn');
+        const divEncontrado = await page.waitForSelector('section.hero-wrap');
 
-        assert(divEncontrado)
+        assert(divEncontrado);
 
-    }).timeout(20000)
+    }).timeout(20000);
 
     it('Poner las credenciales incorrectas de un usuario; y ver que tras hacar clic en Submit, seguimos en la misma página de login', async () => {
 
-        await page.goto('http://localhost:3000/login', { waitUntil: 'networkidle2' })
+        await page.goto('http://localhost:3000/login', { waitUntil: 'networkidle2' });
 
         // Escribir el mail
-        const email = await page.$('form[action="/login"] #email')
+        const email = await page.$('form[action="/login"] #email');
         await email.type("loquillo@gmail.com");
 
         // Escribir password
-        const password = await page.$('form[action="/login"] #password')
+        const password = await page.$('form[action="/login"] #password');
         await password.type("huiter987");
 
-        await page.click('input.btn')
-        const divEncontrado = await page.waitForSelector('div.alert')
+        await page.click('input.btn');
+        const divEncontrado = await page.waitForSelector('div.alert');
 
-        assert(divEncontrado)
+        assert(divEncontrado);
 
-    }).timeout(40000)
+    }).timeout(40000);
 
     it('Crear un apartmento con valores "normales"; o adecuados, es decir, que pasen la validación. Ir al endpoint /new-apartment; rellenar todos los campos, y hacer clic en el botón de submit. Comprobar que trás hacer clic en dicho botón; estamos en la vista de detalle del apartamento (puedes usar algo del DOM, o mirar en que URL estamos)', async () => {
 
@@ -88,10 +88,10 @@ describe('Hacer login, usuario correcto', () => {
         await page.goto('http://localhost:3000/new-apartment', { waitUntil: 'networkidle2' });
 
         // llenar formulario con todos los datos básicos
-        const title = await page.$('form[action="/new-apartment"] #title')
+        const title = await page.$('form[action="/new-apartment"] #title');
         await title.type("Ideal para parejas jovenes sin niños ni mascotas", { delay: retraso });
 
-        const description = await page.$('form[action="/new-apartment"] #description')
+        const description = await page.$('form[action="/new-apartment"] #description');
         await description.type("Muy buenas vistas, cerca de la playa y buenos restaurantes", { delay: retraso });
 
         const terms = await page.$('form[action="/new-apartment"] #terms');
@@ -160,12 +160,8 @@ describe('Hacer login, usuario correcto', () => {
         assert(url.includes("/apartment/"));
         // debería eliminar el apartamento anyadido?? apartmentInserted._id ??
 
-    }).timeout(40000)
-})
-
-describe('Crear apartamentos', () => {
-
-})
+    }).timeout(40000);
+});
 
 describe('Apartments getAllAvailableApartmentsForBooking', () => {
 
@@ -182,12 +178,12 @@ describe('Apartments getAllAvailableApartmentsForBooking', () => {
         const lista = await Apartment.getAllAvailableApartmentsForBooking();
 
          hayAlgunApartamentoBaja = lista.some( (apartment) => {
-            return ( (apartment.idBooking!='') || (apartment.unsubscribeUser!='') || (apartment.unsubscribeDate!=''))
+            return ( (apartment.idBooking!='') || (apartment.unsubscribeUser!='') || (apartment.unsubscribeDate!=''));
         })
 
         assert(!hayAlgunApartamentoBaja);
 
-    }).timeout(10000)
+    }).timeout(10000);
 
     after( () => {
         mongoose.connection.close();
