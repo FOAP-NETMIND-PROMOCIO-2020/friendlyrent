@@ -111,10 +111,18 @@ exports.postNewApartment = async(req, res) => {
         res.send("you have to be logged in before inserting");
     }
 
-    let apartment = await Tools.constructorApartment(req.body, req.user._id)
+    try {
+        
+        let apartment = await Tools.constructorApartment(req.body, req.user._id,req.files['photo'])
 
-    let apartmentInserted = await Apartment.createNewApartment(apartment)
+        var apartmentInserted = await Apartment.createNewApartment(apartment)
 
+    } catch (error) {
+
+        throw new Error('algien a modificado algun resultasdo en la vista')
+
+    }
+    
     if (apartmentInserted._id) {
         res.redirect('/apartment/' + apartmentInserted._id)
     } else {
@@ -123,11 +131,14 @@ exports.postNewApartment = async(req, res) => {
 
 }
 
+exports.resetApartmentQuery = async(req,res) => {
+    res.redirect('index');
+}
+
 
 exports.postAJAXuser = async(req,res) => {
 
     let x = await User.find({},{'local.email':1}).catch(err => console.log('error: -> ', err))    
-    console.log('------------------------------------',x);
     res.send(x)
     
 }
