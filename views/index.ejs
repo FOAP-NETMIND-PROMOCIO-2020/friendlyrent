@@ -55,10 +55,9 @@
           <input class="form-control" type="number" name="rooms" id="rooms" min="1" max="5" pattern="[0-9]">
         </div>
         <div class="form-group ml-3">
-          <label for="buscar">&nbsp;</label>
+          <label for="buscar" >&nbsp;</label>
 
-          <input id="buscar" class="form-control" type="submit" value="Find"
-            style="width: 100px; background-color: #24A148 !important; color: white !important">
+          <input id="buscar" class="form-control" type="submit" value="Find" style="width: 100px; background-color: #24A148 !important; color: white !important">
         </div>
         <div class="form-group ml-3">
           <label for="reset">&nbsp;</label>
@@ -119,9 +118,7 @@
                   <h3><a href="#"><%= apartment.title %></a></h3>
                   <!-- Aquí se introduce la localidad del Apartamento -->
                   <span class="location"><%= apartment.location.city %>, <%= apartment.location.province %></span>
-                  <a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-                    <span class="fa fa-link"></span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
