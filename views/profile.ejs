@@ -72,56 +72,66 @@
             <h2>My history</h2>
             <p>List of rented apartments:</p>
             <br>
-            <!-- console.log("vista renderizada", apartmentOwner) %>  -->
+            <% for (let i = 0; i < apartmentOwner.length; i++) { %>
+            <h4><u><%= apartmentOwner[i].title %></u></h4>
+            <%#  console.log("vista renderizada-----XXXXXXXXXXXX", apartmentOwner) %>
 
             <br>
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Apartment</th>
                         <th>Customer</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% for (let x = 0; x < apartmentOwner.length; x++) { %>
+                    <% for (let x = 0; x < apartmentOwner[i].bookingDetail.length; x++) { %>
                     <tr>
-                        <td><%= apartmentOwner[x].idApartment.title  %> </td>
-                        <td><%= apartmentOwner[x].idUser.fullName %></td>
-                        <td><%= apartmentOwner[x].contractStartDate %></td>
-                        <td><%= apartmentOwner[x].contractEndPlannedDate %></td>
+                        <td><%= apartmentOwner[i].bookingDetail[x].idUser.fullName %></td>
+                        <td><%= apartmentOwner[i].bookingDetail[x].contractStartDate %></td>
+                        <td><%= apartmentOwner[i].bookingDetail[x].contractEndPlannedDate %></td>
                         <td>
                             <form action="/add-comment" method="POST">
                                 <label for="id_owner"></label>
-                                <input type="hidden" value="<%= apartmentOwner[x].idApartment.registerUser %>"
-                                    name="id_owner" id="id_owner">
+                                <input type="hidden" value="<%= apartmentOwner[i].registerUser._id %>" name="id_owner"
+                                    id="id_owner">
 
                                 <label for="id_user"></label>
-                                <input type="hidden" value="<%= apartmentOwner[x].idUser._id %>" name="id_user"
-                                    id="id_user">
+                                <input type="hidden" value="<%= apartmentOwner[i].bookingDetail[x].idUser._id %>"
+                                    name="id_user" id="id_user">
 
-                                <input class="btn btn-dark btn-lg" value="Inserta comentario" type="submit">
+                                <input class="btn btn-dark btn-xs" value="Inserta comentario" type="submit">
                             </form>
                         </td>
                         <td>
                             <form action="/rejected" method="POST">
 
+                                <label for="id_apartment"></label>
+                                <input type="hidden" value="<%= apartmentOwner[i]._id %>" name="id_apartment"
+                                    id="id_apartment">
                                 <label for="id_booking"></label>
-                                <input type="hidden" value="<%= apartmentOwner[x]._id %>" name="id_booking"
-                                    id="id_booking">
-
-                                <input class="btn btn-danger btn-lg" value="Rechazar" type="submit">
+                                <input type="hidden" value="<%= apartmentOwner[i].bookingDetail[x]._id %>"
+                                    name="id_booking" id="id_booking">
+                                <%  if(apartmentOwner[i].bookingDetail[x].requestStatus!="pending"){ %>
+                                <input class="btn btn-danger btn-xs" value="Rechazar" type="submit" disabled>
+                                <% } else { %>
+                                <input class="btn btn-danger btn-xs" value="Rechazar" type="submit">
+                                <% } %>
                             </form>
                         </td>
-                           <td>
+                        <td>
                             <form action="/accepted" method="POST">
 
                                 <label for="id_booking"></label>
-                                <input type="hidden" value="<%= apartmentOwner[x]._id %>" name="id_booking"
-                                    id="id_booking">
+                                <input type="hidden" value="<%= apartmentOwner[i].bookingDetail[x]._id %>"
+                                    name="id_booking" id="id_booking">
+                                <%  if(apartmentOwner[i].bookingDetail[x].requestStatus!="pending"){ %>
+                                <input class="btn btn-success btn-xs" value="Aceptar" type="submit" disabled>
+                                <% } else { %>
+                                <input class="btn btn-success btn-xs" value="Aceptar" type="submit">
+                                <% } %>
 
-                                <input class="btn btn-success btn-lg" value="Aceptar" type="submit">
                             </form>
                         </td>
                     </tr>
@@ -129,6 +139,7 @@
                 </tbody>
             </table>
             <br>
+            <% } %>
 
         </div>
 

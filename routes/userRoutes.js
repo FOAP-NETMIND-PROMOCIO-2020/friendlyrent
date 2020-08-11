@@ -39,12 +39,26 @@ module.exports = (app, passport) => {
     }));
 
     app.get('/profile', isLoggedIn, async (req, res) => {  // impide acceder a los no logueados
-        
+
+        const owner = req.user._id;
+        const apartment = "";
+
+        console.log("-----AQYUIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+
         if(req.user && req.user.identifUser == "owner"){
-            
-            var apartmentOwner = await Apartments.getAllApartmentsOwn(req.user._id);
-            console.log("--------Que hay de mis apartamentos", apartmentOwner)
-             
+            let searchCriteria = {};
+
+            if (owner) {
+                searchCriteria["registerUser"] = { $eq: owner };
+            }
+        
+            if (apartment) {
+                searchCriteria["_id"] = { $eq: apartment }
+            }
+
+            console.log("--------Que parametros mando", searchCriteria)
+            var apartmentOwner = await Apartments.getAllApartmentsOwn(searchCriteria);
+             // console.log("--------Que hay de mis apartamentos", apartmentOwner)
         }
         
         res.render('profile', {
@@ -102,7 +116,7 @@ module.exports = (app, passport) => {
 
     app.post('/rejected', async (req, res) => {
         
-        await User.writetMessages(req.body.id_owner, req.body.id_user, req.body.comment);
+        await Bookings.setRequestStatusToRejected(req.body.id_apartment, req.body.id_booking);
         res.redirect('/profile')
        
     });

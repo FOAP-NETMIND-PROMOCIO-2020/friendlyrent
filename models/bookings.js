@@ -53,7 +53,7 @@ const bookingsSchema = new Schema({
 
 bookingsSchema.statics.getAllApartmentsUsr = async function (id) {
     let results = await this.find({ idUser: id }).populate('idApartment');
-    console.log("que me sacas DE INQUILINMO", results);
+    //console.log("que me sacas DE INQUILINMO", results);
 
     return results;
 }
@@ -67,7 +67,7 @@ bookingsSchema.statics.writetMessagesToF = async function (idOwner, idCustomer) 
         match: { registerUser: idOwner }
         // ,        select: 'description -_id'
     });
-    console.log("Encontrado", results);
+    //console.log("Encontrado", results);
     if (results == null || results.idApartment == null) {
         return false
     } else {
@@ -81,7 +81,7 @@ bookingsSchema.statics.writetMessagesToF = async function (idOwner, idCustomer) 
 bookingsSchema.statics.getAllApartmentsUsrAnt = async function (id) {
 
     let resultado = await this.find({ idUser: id }).populate('idUser').populate('idApartment');
-    console.log("que me sacas", resultado);
+    //console.log("que me sacas", resultado);
     return resultado;
 }
 
@@ -99,7 +99,7 @@ bookingsSchema.statics.getAllApartmentsOwn = async function (id) {
 
     }).populate('idUser');
 
-    console.log("----------- que me sacas bookings + usuario", resultado);
+    //console.log("----------- que me sacas bookings + usuario", resultado);
     return resultado;
 }
 
@@ -168,14 +168,18 @@ bookingsSchema.statics.setRequestStatusToAccept = async function (idBooking) {
         
     });
 
-    setRequestStatusToRejected (targetBooking.idApartment);
-
+    this.setRequestStatusToRejected (targetBooking.idApartment);
 
 }
 
-bookingsSchema.statics.setRequestStatusToRejected = async function (idApartment) {
-const filter = {$and:[{idApartment: idApartment}, { requestStatus: "pending" }]};
-console.log(filter);
+bookingsSchema.statics.setRequestStatusToRejected = async function (idApartment, idBooking) {
+ 
+if (idBooking){
+    var filter = {$and:[{idApartment: idApartment}, {_id: idBooking}, { requestStatus: "pending" }]};
+}else{
+    filter = {$and:[{idApartment: idApartment}, { requestStatus: "pending" }]};
+}
+
 let x = await this.updateMany(filter, {requestStatus: "rejected"}).catch(err=>{
     console.log("Error", err)
 });
