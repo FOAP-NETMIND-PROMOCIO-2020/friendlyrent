@@ -25,9 +25,10 @@ module.exports = (app, passport) => {
             }
         }
         res.render('login', {
-            message: message,  //mensaje desde la misma vista
+            message: message, //mensaje desde la misma vista
             alert: status,
-            user: req.user
+            user: req.user,
+            path: "LoginPage"
         });
     });
 
@@ -54,21 +55,22 @@ module.exports = (app, passport) => {
     app.get('/forgot', (req, res) => {
         res.render('forgot', {
             user: null,
-            message: req.flash('error')
+            message: req.flash('error'),
+            path: ""
         });
 
     });
 
     app.post('/forgot', (req, res, next) => {
         async.waterfall([
-            function (done) {
-                crypto.randomBytes(20, function (err, buf) {
+            function(done) {
+                crypto.randomBytes(20, function(err, buf) {
                     var token = buf.toString('hex');
                     done(err, token);
                 });
             },
-            function (token, done) {
-                User.findOne({ email: req.body.email }, function (err, user) {
+            function(token, done) {
+                User.findOne({ email: req.body.email }, function(err, user) {
                     if (!user) {
                         req.flash('error', 'No account with that email address exists.');
                         return res.redirect('/forgot');
@@ -77,12 +79,12 @@ module.exports = (app, passport) => {
                     user.resetPasswordToken = token;
                     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
-                    user.save(function (err) {
+                    user.save(function(err) {
                         done(err, token, user);
                     });
                 });
             },
-            function (token, user, done) {
+            function(token, user, done) {
 
                 var smtpTransport = nodemailer.createTransport(
                     sendgridTransport({
@@ -101,22 +103,23 @@ module.exports = (app, passport) => {
                         'http://' + req.headers.host + '/reset/' + token + '\n\n' +
                         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
                 };
-                smtpTransport.sendMail(mailOptions, function (err) {
+                smtpTransport.sendMail(mailOptions, function(err) {
                     req.flash('loginMessage', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
                     done(err, 'done');
                 });
             }
-        ], function (err) {
+        ], function(err) {
             res.render('login', {
-                message: req.flash('loginMessage'),  //mensaje desde la misma vista
+                message: req.flash('loginMessage'), //mensaje desde la misma vista
                 alert: 'primary',
-                user: req.user
+                user: req.user,
+                path: 'LoginPage'
             });
         });
     });
 
-    app.get('/reset/:token', function (req, res) {
-        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
+    app.get('/reset/:token', function(req, res) {
+        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
                 req.flash('error', 'Password reset token is invalid or has expired.');
                 return res.redirect('/forgot');
@@ -124,20 +127,21 @@ module.exports = (app, passport) => {
             res.render('reset', {
                 user: req.user,
                 token: req.params.token,
-                message: req.flash('error')
+                message: req.flash('error'),
+                path: ''
             });
         });
     });
 
-    app.post('/reset/:token', function (req, res) {
+    app.post('/reset/:token', function(req, res) {
         async.waterfall([
-            function (done) {
+            function(done) {
 
                 if (req.body.password != req.body.confirm) {
                     req.flash('error', 'Passwords are different!');
                     return res.redirect('back');
                 }
-                User.findOne({ resetPasswordToken: req.params.token.slice(1), resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
+                User.findOne({ resetPasswordToken: req.params.token.slice(1), resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
 
                     if (!user) {
                         req.flash('error', 'Password reset token is invalid or has expired.');
@@ -147,14 +151,14 @@ module.exports = (app, passport) => {
                     user.local.password = user.generateHash(req.body.password);
                     user.resetPasswordToken = undefined;
                     user.resetPasswordExpires = undefined;
-                    user.save(function (err) {
-                        req.logIn(user, function (err) {
+                    user.save(function(err) {
+                        req.logIn(user, function(err) {
                             done(err, user);
                         });
                     });
                 });
             },
-            function (user, done) {
+            function(user, done) {
                 var smtpTransport = nodemailer.createTransport(
                     sendgridTransport({
                         auth: {
@@ -169,32 +173,33 @@ module.exports = (app, passport) => {
                     text: 'Hello,\n\n' +
                         'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
                 };
-                smtpTransport.sendMail(mailOptions, function (err) {
+                smtpTransport.sendMail(mailOptions, function(err) {
                     req.flash('success', 'Success! Your password has been changed.');
                     done(err);
                 });
             }
-        ], function (err) {
+        ], function(err) {
             res.render('login', {
-                message: req.flash('success'),  //mensaje desde la misma vista
+                message: req.flash('success'), //mensaje desde la misma vista
                 alert: 'success',
-                user: req.user
+                user: req.user,
+                path: 'LoginPage'
             });
         });
     });
 
-    app.get('/profile', isLoggedIn, async (req, res) => {  // impide acceder a los no logueados
+    app.get('/profile', isLoggedIn, async(req, res) => { // impide acceder a los no logueados
 
         const owner = req.user._id;
         const apartment = "";
 
-        if(req.user && req.user.identifUser == "owner"){
+        if (req.user && req.user.identifUser == "owner") {
             let searchCriteria = {};
 
             if (owner) {
                 searchCriteria["registerUser"] = { $eq: owner };
             }
-        
+
             if (apartment) {
                 searchCriteria["_id"] = { $eq: apartment }
             }
@@ -203,21 +208,21 @@ module.exports = (app, passport) => {
         }
 
         res.render('profile', {
-            user: req.user,     // aquí está la info del usuario
+            user: req.user, // aquí está la info del usuario
             isOwner: (req.user && req.user.identifUser == "owner"),
             path: "ProfilePage",
             isCustomer: (req.user && req.user.identifUser == "customer"),
             apartmentCustomer: [{
 
-                title: "Platja D'Aro",
-                startDate: "2018-01-01",
-                endDate: "2020-01-01"
-            },
-            {
-                title: "Calafat",
-                startDate: "2020-03-01",
-                endDate: "2020-07-01"
-            }
+                    title: "Platja D'Aro",
+                    startDate: "2018-01-01",
+                    endDate: "2020-01-01"
+                },
+                {
+                    title: "Calafat",
+                    startDate: "2020-03-01",
+                    endDate: "2020-07-01"
+                }
             ],
             apartmentOwner: apartmentOwner
         });
@@ -245,22 +250,22 @@ module.exports = (app, passport) => {
 
     })
 
-    app.post('/new-comment', async (req, res) => {
-        
+    app.post('/new-comment', async(req, res) => {
+
         await User.writedMessages(req.body.id_owner, req.body.id_user, req.body.comment);
         res.redirect('/profile')
-       
+
     });
 
-    app.post('/rejected', async (req, res) => {
-        
+    app.post('/rejected', async(req, res) => {
+
         await Bookings.setRequestStatusToRejected(req.body.id_apartment, req.body.id_booking);
         res.redirect('/profile')
-       
+
     });
 
-    app.post('/accepted', async (req, res) => {
-        
+    app.post('/accepted', async(req, res) => {
+
         await Bookings.setRequestStatusToAccept(req.body.id_booking);
         res.redirect('/profile')
 

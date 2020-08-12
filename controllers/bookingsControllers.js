@@ -2,10 +2,10 @@ const Apartment = require('../models/apartments').Apartment;
 const Bookings = require('../models/bookings');
 const moment = require('moment');
 
-exports.getNewRental  =  async (req, res) => {
+exports.getNewRental = async(req, res) => {
     const idApartment = req.params.idApartment;
-    const apartment = await Apartment.getOneApartment({_id: idApartment});
-    
+    const apartment = await Apartment.getOneApartment({ _id: idApartment });
+
     // Obtener fecha del sistema (la fecha de hoy): Pra que luego en el formulario sólo pueda escojer de la fecha de hoy para adelante
     var date = new Date();
     var month = date.getMonth() + 1;
@@ -14,10 +14,10 @@ exports.getNewRental  =  async (req, res) => {
     if (month.toString().length < 2) {
         month = '0' + month;
     }
-    if (day.toString().length < 2) { 
+    if (day.toString().length < 2) {
         day = '0' + day;
     }
-    
+
     var currentDate = date.getFullYear() + "-" + month + "-" + day;
 
 
@@ -25,7 +25,8 @@ exports.getNewRental  =  async (req, res) => {
         apartment: apartment,
         currentDate: currentDate,
         userID: req.user._id,
-        user: req.user
+        user: req.user,
+
     });
 }
 
@@ -35,10 +36,10 @@ exports.postNewRental = (req, res, next) => {
     const rentalStartDate = req.body.rentalStartDate;
     const rentalTime = req.body.rentalTime;
     const rentalPrice = req.body.rentalPrice;
-    
+
     // Obtener/Calcular la fecha de planificación de fin de contrato (Hemos tenido que instalar "moment")
     const plannedDate = moment(rentalStartDate).add(rentalTime, 'M').format("YYYY-MM-DD");
-    
+
     const newRental = new Bookings({
         idApartment: idApartmentHidden,
         price: rentalPrice,
@@ -50,14 +51,14 @@ exports.postNewRental = (req, res, next) => {
         idUser: idUserHidden,
         requestStatus: "pending"
     })
-    
+
     newRental.save()
-    .then( result => {
-        res.send("Reserva insertada con éxito!");
-        console.log("Reserva insertada:", result);
-    })
-    .catch ( err => {
-        console.log("Error!!", err); 
-        return next(err);
-    })
+        .then(result => {
+            res.send("Reserva insertada con éxito!");
+            console.log("Reserva insertada:", result);
+        })
+        .catch(err => {
+            console.log("Error!!", err);
+            return next(err);
+        })
 }
