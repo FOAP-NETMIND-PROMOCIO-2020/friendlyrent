@@ -40,6 +40,6 @@ El equipo que ha hecho posible este proyecto.
 * **Raúl Garcia** - *Si se puede hacer más fácil, ¿por qué no?* - [rawl0408](https://github.com/rawl0408) &#129333;&#127995;
 * **José Calderon** - *Start debugger: "Creo que te faltó una coma"* - [kira14](https://github.com/kira14) &#128373;&#127995;
 * **Sergi Ortiz** - *Si algo puede salir mal, saldrá mal* - [SergiHub](https://github.com/SergiHub) &#128517;
-* **Jordi Targarona** - *Nadie lo ha visto en persona pero es de mucha ayuda* - [jorditarga](https://github.com/jorditarga) &#128434;
+* **Jordi Targarona** - *Nadie lo ha visto en persona pero es de mucha ayuda* - [jorditarga](https://github.com/jorditarga) &#128187;
 
 ---
