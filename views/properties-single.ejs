@@ -38,9 +38,9 @@
     <%- include('partials/header'); %>
 
         <!-- END nav -->
-        <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <!-- <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
-            <div class="container">
+             <div class="container">
                 <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
                     <div class="col-md-9 ftco-animate pb-0 text-center">
                         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
@@ -49,10 +49,11 @@
                             <span>Properties Single <i class="fa fa-chevron-right"></i></span></p>
                         <h1 class="mb-3 bread">Property Details</h1>
                     </div>
-                </div>
-            </div>
-        </section>
+                </div> 
+            </div> 
+        </section>  -->
 
+        
 
         <section class="ftco-section ftco-property-details">
             <div class="container">
@@ -89,40 +90,41 @@
                                 </a>
 
                             </div>
-
+                            <!--
+                                Description card
+                            -->
                             <div class="row">
-
-                                <div class="text col-md-4">
+                                <div class="text card-header col-md-4  text-center">
                                     <span class="subheading"><%= apartment.location.city %></span>
-                                    <h2>
+                                    <h2 class="card-title text-success">
                                         <%= apartment.title %>
                                     </h2>
-                                    <h4>Address
-                                        <%= apartment.location.address %>
-                                    </h4>
-                                    <h4>City
-                                        <%= apartment.location.city %>
-                                    </h4>
-                                    <h4>Province
-                                        <%= apartment.location.province %>
-                                    </h4>
-                                    <h4 data-latitude="<%= apartment.location.gps[0]%>" data-longitude="<%= apartment.location.gps[1]%>">
+                                    <h4><i class="fa fa-map fa-sm"></i> Address </h4>
+                                        <p class="text-muted"><%= apartment.location.address %></p>
+                                    
+                                    <h4><i class="fa fa-map-signs"></i> City </h4>
+                                        <p class="text-muted"><%= apartment.location.city %></p>
+                                    
+                                    <h4><i class="fa fa-globe"></i> Province </h4>
+                                        <p class="text-muted"><%= apartment.location.province %></p>
+                                        
+                                        <!-- <h4 data-latitude="<%# apartment.location.gps[0]%>" data-longitude="<%# apartment.location.gps[1]%>">
                                         </data-longitude>Location</h4>
-                                    <h6> Latitude
-                                        <%= apartment.location.gps[0]%> Longitude
-                                            <%= apartment.location.gps[1]%>
-                                    </h6>
-                                    <% if (isLoggedUser) { %>
-                                        <a href="/new-booking/<%= apartment._id %>"><button class="btn btn-dark"
-									type="button">Rent</button></a>
-                                        <% } %>
-                                </div>
+                                        <h6> Latitude
+                                        <%# apartment.location.gps[0]%> Longitude
+                                            <%# apartment.location.gps[1]%>
+                                        </h6>
+                                        <%# if (isLoggedUser) { %>
+                                        <a href="/new-booking/<%# apartment._id %>"><button class="btn btn-dark"
+                                        type="button">Rent</button></a>
+                                        <%# } %> -->
+                            </div>
 
 
                                 <!-- Map api beginning-->
 
                                 <div class="col-md-8">
-                                    <div id="mapid"></div>
+                                    <div id="mapid" style="z-index: -1;"></div>
                                     <script>
                                         var mymap = L.map('mapid').setView([41.390205, 2.154007], 13);
                                         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib21pcmFzIiwiYSI6ImNrY2N5Z2RseTA5aTkycG9hcGZiYzJrYmwifQ.aiWWPHaXoI48e8V_l-bkyg', {
@@ -173,9 +175,6 @@
                                     <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Features</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Description</a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Review</a>
                                 </li>
                             </ul>
@@ -184,47 +183,49 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-1">
                                         <ul class="features">
-                                            <li class="check"><span class="fa fa-check-circle"></span>Square Metres
-                                                <%= apartment.squareMetres %>
+                                            <li class=""><span class="fa fa-expand" aria-hidden="true"></span>
+                                                <%= apartment.squareMeters %>
                                             </li>
-                                            <li class="check"><span class="fa fa-check-circle"></span>Bedrooms
+                                            <li class=""><span class="fa fa-bed" aria-hidden="true"></span>
                                                 <%= apartment.rooms %>
                                             </li>
-                                            <li class="check"><span class="fa fa-check-circle"></span>Bathrooms
+                                            <li class=""><span class="fa fa-bath" aria-hidden="true"></span>
                                                 <%= apartment.bathrooms %>
                                             </li>
-
+                                            
                                         </ul>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <ul class="features">
                                             <% for (let i = 0; i< apartment.services.length; i++) { %>
-                                                <li class="check"><span class="fa fa-check-circle"></span>
-                                                    <%= apartment.services[i].codeService %>
-                                                        <span class="<%= apartment.services[i].iconService %>"></span></li>
+                                                <li class=""><span class="<%= apartment.services[i].iconService %>"></span>
+                                                     <%= apartment.services[i].codeService %>
+                                                        </li>
 
                                                 <%}	%>
                                         </ul>
                                     </div>
-
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-                                <% if (apartment.description) { %>
-                                    <p>
-                                        <%=apartment.description %>
-                                    </p>
-                                    <% } %>
-
-                                        <% if (apartment.terms) { %>
-                                            <h4>Terms: </h4>
+                                    
+                                    <div class="col-md-4" id="" role="" aria-labelledby="">
+                                        <% if (apartment.description) { %>
+                                            <h4>Description:</h4>
                                             <p>
-                                                <%=apartment.terms %>
+                                                <%=apartment.description %>
                                             </p>
                                             <% } %>
+                                    </div>
+                                    <div class="col-md-4">
+                                                <% if (apartment.terms) { %>
+                                                    <h4>Terms: </h4>
+                                                    <p>
+                                                        <%=apartment.terms %>
+                                                    </p>
+                                                    <% } %>
+                                    </div>
+
+                                </div>
                             </div>
 
                             <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">

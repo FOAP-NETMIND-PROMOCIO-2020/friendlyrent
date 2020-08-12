@@ -77,7 +77,7 @@ userSchema.methods.validatePassword = function(password) {
     return bcrypt.compareSync(password, this.local.password); //compara la contraseña con la almacenada en la BBDD
 }
 
-userSchema.statics.writetMessages = async function (idOwner, idCustomer, comments) {
+userSchema.statics.writedMessages = async function (idOwner, idCustomer, comments) {
         const filter = { _id: idCustomer };
         let newComment = {
         comment : comments,

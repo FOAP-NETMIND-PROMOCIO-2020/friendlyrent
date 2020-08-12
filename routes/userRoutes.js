@@ -1,16 +1,13 @@
 const passport = require("passport");
 const Bookings = require('../models/bookings');
 const User = require('../models/user');
+const Apartments = require('../models/apartments').Apartment;
 const async = require('async');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 
 module.exports = (app, passport) => {
-
-    app.get('/', (req, res) => {
-        res.render('index');
-    });
 
     app.get('/login', (req, res) => {
         if (req.isAuthenticated()) {
@@ -43,7 +40,8 @@ module.exports = (app, passport) => {
     app.get('/signup', (req, res) => {
         res.render('signup', {
             message: req.flash('signupMessage'),
-            user: req.user
+            user: req.user,
+            path: "SignUpPage"
         });
     });
 
@@ -187,15 +185,27 @@ module.exports = (app, passport) => {
 
     app.get('/profile', isLoggedIn, async (req, res) => {  // impide acceder a los no logueados
 
-        if (req.user && req.user.identifUser == "owner") {
+        const owner = req.user._id;
+        const apartment = "";
 
-            var apartmentOwner = await Bookings.getAllApartmentsOwn(req.user._id);
+        if(req.user && req.user.identifUser == "owner"){
+            let searchCriteria = {};
 
+            if (owner) {
+                searchCriteria["registerUser"] = { $eq: owner };
+            }
+        
+            if (apartment) {
+                searchCriteria["_id"] = { $eq: apartment }
+            }
+
+            var apartmentOwner = await Apartments.getAllApartmentsOwn(searchCriteria);
         }
 
         res.render('profile', {
             user: req.user,     // aquí está la info del usuario
             isOwner: (req.user && req.user.identifUser == "owner"),
+            path: "ProfilePage",
             isCustomer: (req.user && req.user.identifUser == "customer"),
             apartmentCustomer: [{
 
@@ -236,8 +246,22 @@ module.exports = (app, passport) => {
     })
 
     app.post('/new-comment', async (req, res) => {
+        
+        await User.writedMessages(req.body.id_owner, req.body.id_user, req.body.comment);
+        res.redirect('/profile')
+       
+    });
 
-        await User.writetMessages(req.body.id_owner, req.body.id_user, req.body.comment);
+    app.post('/rejected', async (req, res) => {
+        
+        await Bookings.setRequestStatusToRejected(req.body.id_apartment, req.body.id_booking);
+        res.redirect('/profile')
+       
+    });
+
+    app.post('/accepted', async (req, res) => {
+        
+        await Bookings.setRequestStatusToAccept(req.body.id_booking);
         res.redirect('/profile')
 
     });

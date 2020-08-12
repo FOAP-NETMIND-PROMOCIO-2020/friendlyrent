@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = require('./user');
 const Bookings = require('./bookings');
 
+
 const Schema = mongoose.Schema;
 
 const locationSchema = Schema({
@@ -27,6 +28,7 @@ const commentsSchema = Schema({
 })
 
 const apartmentSchema = new Schema({
+
     title: {
         type: String,
         required: true
@@ -98,7 +100,11 @@ const apartmentSchema = new Schema({
         type: String,
         ref: 'bookings',
         required: false
+    },
+    bookingDetail:{ // Esta propiedad se utiliza solo para mostrar en la vista. No rellenar
+        type:[Object] 
     }
+
 })
 
 // Colección de Servicios
@@ -125,6 +131,30 @@ apartmentSchema.statics.getAllApartments = async function (searchCriteria = {}, 
 
     return await this.find(searchCriteria, wantedField).populate('services').populate('comments.user_id').limit(num);
 
+}
+
+/**
+ * get all the apartments
+ * @param {Object} searchCriteria The one that is given to you by default is set to set everything to you
+ */
+ 
+apartmentSchema.statics.getAllApartmentsOwn = async function (searchCriteria) {
+
+    // apartmentSchema.add({AA55:'string'})
+
+   // console.log("esquemas-----ssssssffffffffffffttttrrrrrrrdfddddddbk.dsjh.kdsfjhfd.khfdk.jhfd.jkdfh.kjdfh.jkdfsh.jkhgk.jh.gh.gjfhg.fjgfh.gjf", apartmentSchema.paths)
+
+    var apartmentsAll = await this.find(searchCriteria).populate('registerUser'); 
+    
+    // console.log("longitud xxxxxxxxxxx", apartmentsAll.length)
+
+    for (let i = 0; i < apartmentsAll.length; i++) {
+
+        apartmentsAll[i].bookingDetail = await Bookings.find({idApartment:apartmentsAll[i]._id}).populate('idUser')
+        
+    return apartmentsAll
+
+}
 }
 
 /**
@@ -160,8 +190,8 @@ apartmentSchema.statics.getOneApartment = async function(searchCriteria = {}, wa
  * @param {String} idApartament  id the apartament
  */
 apartmentSchema.statics.canLeaveComment = async function(idUser,idApartament) {
-
-    return ( await Bookings.findOne({idUser:idUser,idApartment:idApartament}))? true : false;
+    
+    return ( await Bookings.findOne({idUser:idUser,idApartment:idApartament,requestStatus:"accepted"}))? true : false;
 
 }
 
@@ -174,7 +204,7 @@ apartmentSchema.statics.canLeaveComment = async function(idUser,idApartament) {
 apartmentSchema.statics.getAllApartmentsOwnNow = async function (id) {
 
     let resultado = await this.find({registerUser:id}).populate('registerUser').populate('idBooking');
-    console.log("que me sacas apartments", resultado);
+    //console.log("que me sacas apartments", resultado);
     return resultado;
 }
 
