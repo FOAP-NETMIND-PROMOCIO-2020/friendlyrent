@@ -7,6 +7,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 
+
 module.exports = (app, passport) => {
 
     app.get('/login', (req, res) => {
@@ -232,6 +233,8 @@ module.exports = (app, passport) => {
         req.logout();
         res.redirect('/');
     });
+
+
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {

@@ -13,6 +13,7 @@ const apartmentRoutes = require('./routes/apartmentRoutes');
 const bookingsRoutes = require('./routes/bookingsRoutes');
 
 const errorControllers = require('./controllers/errors');
+const team = require('./controllers/teamControllers');
 
 const { url } = require('./config/database');
 const { clear } = require('console');
@@ -52,6 +53,9 @@ app.use(flash());
 app.use(express.static('public'));
 app.use(apartmentRoutes);
 app.use(bookingsRoutes);
+
+app.get('/team', team.getTeam);
+
 
 // routes
 require('./routes/userRoutes')(app, passport);
