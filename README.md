@@ -5,7 +5,9 @@
 
 Aplicación Web para la gestión de alquileres entre inquilinos y propietarios.
 
+# Demo de la aplicación
 
+Pàgina Web [FriendlyRent](https://sheltered-refuge-60050.herokuapp.com/)
 
 ### Instalación 🔧
 
