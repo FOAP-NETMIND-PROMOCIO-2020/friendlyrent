@@ -1,6 +1,7 @@
 const passport = require("passport");
 const Bookings = require('../models/bookings')
 const User = require('../models/user')
+const Team = require('../models/team')
 
 module.exports = (app, passport) => {
 
@@ -63,8 +64,7 @@ module.exports = (app, passport) => {
             ],
             apartmentOwner: apartmentOwner 
                 
-            
-                
+                          
             
         });
     });
@@ -73,6 +73,8 @@ module.exports = (app, passport) => {
         req.logout();
         res.redirect('/');
     });
+
+
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {
@@ -97,4 +99,6 @@ module.exports = (app, passport) => {
         res.redirect('/profile')
        
     });
+    
+
 }

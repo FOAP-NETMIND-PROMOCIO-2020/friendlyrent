@@ -9,9 +9,8 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-
-                <li class="nav-item"><a href="" class="nav-link">Team</a></li>
-
+                <li class="nav-item <%= path == "TeamPage" ? "active" : "" %>"><a href="/team" class="nav-link">Team</a></li>
+                
                 <li class="nav-item"><a href="/" class="nav-link">Properties</a></li>
 <% if(!user) {%> 
                 <!--this is the modal button-->
