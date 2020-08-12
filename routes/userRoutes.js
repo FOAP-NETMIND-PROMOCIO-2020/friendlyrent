@@ -3,11 +3,12 @@ const Bookings = require('../models/bookings')
 const User = require('../models/user')
 const Apartments = require('../models/apartments').Apartment
 
+
 module.exports = (app, passport) => {
 
-    app.get('/', (req, res)  => {
-        res.render('index');
-    });
+    // app.get('/', (req, res)  => {
+    //     res.render('index');
+    // });
 
     app.get('/login', (req, res)  => {
         if(req.isAuthenticated()) {
@@ -15,7 +16,8 @@ module.exports = (app, passport) => {
         }
         res.render('login', {
             message: req.flash('loginMessage'),  //mensaje desde la misma vista
-            user: req.user
+            user: req.user,
+            path: "LoginPage"
         });
     });
 
@@ -28,7 +30,8 @@ module.exports = (app, passport) => {
     app.get('/signup', (req, res) => {
         res.render('signup', {
             message: req.flash('signupMessage'),
-            user: req.user
+            user: req.user,
+            path: "SignUpPage"
         });
     })
 
@@ -64,6 +67,7 @@ module.exports = (app, passport) => {
         res.render('profile', {
             user: req.user,     // aquí está la info del usuario
             isOwner: (req.user && req.user.identifUser == "owner"),
+            path: "ProfilePage",
             isCustomer: (req.user && req.user.identifUser == "customer"),
             apartmentCustomer: [{
                 
@@ -109,7 +113,7 @@ module.exports = (app, passport) => {
 
     app.post('/new-comment', async (req, res) => {
         
-        await User.writetMessages(req.body.id_owner, req.body.id_user, req.body.comment);
+        await User.writedMessages(req.body.id_owner, req.body.id_user, req.body.comment);
         res.redirect('/profile')
        
     });

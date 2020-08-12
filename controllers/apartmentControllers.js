@@ -38,7 +38,9 @@ exports.getAllApartments = async(req, res) => {
     res.render('index', {
         isCustomer: (req.user && req.user.identifUser == "customer"),
         apartments: apartments,
-        user: req.user
+        user: req.user,
+        isOwner: (req.user && req.user.identifUser == "owner"),
+        path: "MainPage"
     });
 }
 
@@ -48,16 +50,17 @@ exports.getDetailedApartment = async(req, res) => {
     let canUserGiveComment = false;
 
     if (req.user) {
-        let idUser = req.user.identifUser;
+        let idUser = req.user._id;
         let idApartment = req.params.idApartment;
-        canUserGiveComment = Apartment.canLeaveComment(idUser, idApartment);
+        canUserGiveComment = await Apartment.canLeaveComment(idUser, idApartment);
     }
 
     res.render('properties-single', {
         apartment: apartment,
         canUserGiveComment: (canUserGiveComment && req.user && req.user.identifUser == 'customer'),
         isLoggedUser: (req.user && req.user.identifUser == 'customer'),
-        user: req.user
+        user: req.user,
+        path: "DetailApartmentPage"
     });
 }
 
@@ -100,7 +103,8 @@ exports.getNewApartment = async(req, res) => {
 
     res.render('new-apartment', {
         services: services,
-        user: req.user
+        user: req.user,
+        path: "NewApartmentPage"
     });
 
 }
@@ -114,7 +118,6 @@ exports.postNewApartment = async(req, res) => {
     try {
         
         let apartment = await Tools.constructorApartment(req.body, req.user._id,req.files['photo'])
-
         var apartmentInserted = await Apartment.createNewApartment(apartment)
 
     } catch (error) {

@@ -190,8 +190,8 @@ apartmentSchema.statics.getOneApartment = async function(searchCriteria = {}, wa
  * @param {String} idApartament  id the apartament
  */
 apartmentSchema.statics.canLeaveComment = async function(idUser,idApartament) {
-
-    return ( await Bookings.findOne({idUser:idUser,idApartment:idApartament}))? true : false;
+    
+    return ( await Bookings.findOne({idUser:idUser,idApartment:idApartament,requestStatus:"accepted"}))? true : false;
 
 }
 
