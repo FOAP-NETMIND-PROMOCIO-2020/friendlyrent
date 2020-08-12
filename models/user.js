@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
-
-
 const commentsSchema = new mongoose.Schema({
     _id: false,
     comment: String,
@@ -40,9 +38,12 @@ const userSchema = new mongoose.Schema({
         required: false
     },
 
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
+
     local: {
         email: String,
-        password: String
+        password: String        
     },
     facebook: {
         email: String,
@@ -76,7 +77,7 @@ userSchema.methods.validatePassword = function(password) {
     return bcrypt.compareSync(password, this.local.password); //compara la contraseña con la almacenada en la BBDD
 }
 
-userSchema.statics.writetMessages = async function (idOwner, idCustomer, comments) {
+userSchema.statics.writedMessages = async function (idOwner, idCustomer, comments) {
         const filter = { _id: idCustomer };
         let newComment = {
         comment : comments,
@@ -92,9 +93,7 @@ userSchema.statics.writetMessages = async function (idOwner, idCustomer, comment
         console.log("Error", err)
     })
     
-    console.log("grabado", x);
-
-    
+    console.log("grabado", x);    
 }
 
 
