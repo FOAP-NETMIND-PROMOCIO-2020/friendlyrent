@@ -29,5 +29,6 @@ Puedes encontrar información de cómo hemos llevado a cabo este proyecto en [Wi
 El equipo que ha hecho posible este proyecto.
 
 * **Óscar Miras** - *Formador y project manager.Escribe los requisitos en servilletas!* - [omiras](https://omiras.github.io/) &#129497;&#127996;
-* **Fran Campo** - *Comediante de star trek, alias "chico python"* - [aplidinio](https://github.com/aplidinio) &#128013;
+* **Fran Campos** - *Comediante de star trek, alias "chico python"* - [aplidinio](https://github.com/aplidinio) &#128013;
+* **Sergio Alocen** - *Entre dichos y hechos, transita el refranero* - [sagalto68](https://github.com/aplidinio) &#129337;&#127995; 
 ---
