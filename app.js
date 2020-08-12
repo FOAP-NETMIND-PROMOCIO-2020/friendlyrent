@@ -6,7 +6,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
-//const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyparser = require('body-parser');
 const session = require('express-session');
@@ -34,17 +33,15 @@ mongoose.connect(url, {
 
 require('./config/passport')(passport);
 
-
 // server variables
 app.set('views', path.join(__dirname, 'views')); //da la dirección de la carpeta views
 app.set('view engine', 'ejs');
 
 // middleware
-//app.use(morgan(process.env.NODE_ENV));
 app.use(cookieParser());  //administra cookies
 app.use(bodyparser.urlencoded({extended: false}));  //info interpretable a través de la url
 app.use(session({
-    secret: 'loquesea',
+    secret: 'session secret key',
     resave: false,
     saveUninitialized: false
 }));
@@ -54,7 +51,6 @@ app.use(flash());
 
 app.use(express.static('public'));
 app.use(apartmentRoutes);
-//app.use(userRoutes);
 app.use(bookingsRoutes);
 
 // routes

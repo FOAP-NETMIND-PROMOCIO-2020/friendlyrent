@@ -15,8 +15,6 @@
                 <!--this is the modal button-->
                 <li class="nav-item <%= path == "SignUpPage" ? "active" : "" %>"><a data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign up </a>
                 </li>
-                <!--li class="nav-item"><a  data-toggle="modal" data-target="#myModal" href="" class="nav-link">Sign in </a></li>
-            <li class="nav-item"><a href="/signup" class="nav-link">Sign up </a></li-->
                 <li class="nav-item <%= path == "LoginPage" ? "active" : "" %>"><a href="/login" class="nav-link">Sign in </a></li> 
 <% } if(user) {%>
                 <li class="nav-item <%= path == "ProfilePage" ? "active" : "" %>"><a href="/profile" class="nav-link">Profile </a></li>
