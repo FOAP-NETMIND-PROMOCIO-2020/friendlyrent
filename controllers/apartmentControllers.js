@@ -118,7 +118,6 @@ exports.postNewApartment = async(req, res) => {
     try {
         
         let apartment = await Tools.constructorApartment(req.body, req.user._id,req.files['photo'])
-
         var apartmentInserted = await Apartment.createNewApartment(apartment)
 
     } catch (error) {

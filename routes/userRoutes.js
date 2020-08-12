@@ -1,6 +1,7 @@
 const passport = require("passport");
 const Bookings = require('../models/bookings')
 const User = require('../models/user')
+const Apartments = require('../models/apartments').Apartment
 
 
 module.exports = (app, passport) => {
@@ -41,11 +42,26 @@ module.exports = (app, passport) => {
     }));
 
     app.get('/profile', isLoggedIn, async (req, res) => {  // impide acceder a los no logueados
-        
+
+        const owner = req.user._id;
+        const apartment = "";
+
+        console.log("-----AQYUIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+
         if(req.user && req.user.identifUser == "owner"){
-            
-            var apartmentOwner = await Bookings.getAllApartmentsOwn(req.user._id);
-             
+            let searchCriteria = {};
+
+            if (owner) {
+                searchCriteria["registerUser"] = { $eq: owner };
+            }
+        
+            if (apartment) {
+                searchCriteria["_id"] = { $eq: apartment }
+            }
+
+            console.log("--------Que parametros mando", searchCriteria)
+            var apartmentOwner = await Apartments.getAllApartmentsOwn(searchCriteria);
+             // console.log("--------Que hay de mis apartamentos", apartmentOwner)
         }
         
         res.render('profile', {
@@ -98,6 +114,20 @@ module.exports = (app, passport) => {
     app.post('/new-comment', async (req, res) => {
         
         await User.writedMessages(req.body.id_owner, req.body.id_user, req.body.comment);
+        res.redirect('/profile')
+       
+    });
+
+    app.post('/rejected', async (req, res) => {
+        
+        await Bookings.setRequestStatusToRejected(req.body.id_apartment, req.body.id_booking);
+        res.redirect('/profile')
+       
+    });
+
+    app.post('/accepted', async (req, res) => {
+        
+        await Bookings.setRequestStatusToAccept(req.body.id_booking);
         res.redirect('/profile')
        
     });

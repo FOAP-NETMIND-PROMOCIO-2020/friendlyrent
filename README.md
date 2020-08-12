@@ -19,7 +19,6 @@ Aplicación Web para la gestión de alquileres entre inquilinos y propietarios.
 * Mongoose - enlace a la issue de como se ha utilizado (funciones de esquema estáticas, etc)
 * Puppeteer y Mocha - Enlace a la issue y al código donde se ejecutan los tests
 
-
 ## Wiki 📖
 
 Puedes encontrar información de cómo hemos llevado a cabo este proyecto en [Wiki](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/wiki)
