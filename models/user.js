@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
-
-
 const commentsSchema = new mongoose.Schema({
     _id: false,
     comment: String,
@@ -40,9 +38,12 @@ const userSchema = new mongoose.Schema({
         required: false
     },
 
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
+
     local: {
         email: String,
-        password: String
+        password: String        
     },
     facebook: {
         email: String,
@@ -92,9 +93,7 @@ userSchema.statics.writetMessages = async function (idOwner, idCustomer, comment
         console.log("Error", err)
     })
     
-    console.log("grabado", x);
-
-    
+    console.log("grabado", x);    
 }
 
 

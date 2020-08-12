@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <title>Login</title>
+    <%- include ("partials/head") %>
+</head>
+
+<body class="forgot">
+    <%- include('partials/header'); %>
+    <div class="container">
+        <div class="col-sm-6 mx-auto">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h1 class="text-center">
+                        <span class="fa fa-sign-in"></span> Forgot Password?
+                    </h1>
+                    <p class="text-center mt-3">Please, enter a valid email to send you a confirmation reset password</p>    
+                    <% if(message.length > 0) { %> 
+                        <div class="alert alert-danger">
+                            <%= message %>     
+                        </div>
+                    <% } %>          
+
+                    <form action="/forgot" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input class="form-control" type="email" name="email" id="email">
+                        </div>
+                        
+                        <input class="btn btn-dark btn-lg" type="submit" value="Reset Password">
+
+                    </form>                   
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

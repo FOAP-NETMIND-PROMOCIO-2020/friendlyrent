@@ -6,11 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "debug": "DEBUG=* nodemon app.js"
+    "debug": "DEBUG=* nodemon app.js",
+    "debug_windows": "SET DEBUG=* nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^3.2.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
@@ -21,6 +23,8 @@
     "moment": "^2.27.0",
     "mongoose": "^5.9.27",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.4.11",
+    "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"

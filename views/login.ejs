@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    
+
     <title>Login</title>
     <%- include ("partials/head.ejs") %>
 </head>
 
 <body class="login">
-    <%- include('partials/header'); %>s
+    <%- include('partials/header'); %>
     <div class="container">
         <div class="col-sm-6 mx-auto">
             <div class="card mt-5">
@@ -16,34 +16,42 @@
                     <h1 class="text-center">
                         <span class="fa fa-sign-in"></span> Login
                     </h1>
-                    <% if(message.length > 0) { %> 
-                        <div class="alert alert-danger">
-                            <%= message %>     
-                        </div>
-                    <% } %> 
+                    <% if(message.length > 0) { %>
+                    <% if(alert == 'success') { %>
+                    <div class="alert alert-success">
+                        <% } else if(alert == 'primary'){ %>
+                        <div class="alert alert-primary">
+                            <% } else { %>
+                            <div class="alert alert-danger">
+                                <% } %>
+                                <%= message %>
+                            </div>
+                            <% } %>
 
-                    <form action="/login" method="POST">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input class="form-control" type="email" name="email" id="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input class="form-control" type="password" name="password" id="password">
-                        </div>
-                        <input class="btn btn-dark btn-lg" type="submit">
+                            <form action="/login" method="POST">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" type="email" name="email" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input class="form-control" type="password" name="password" id="password">
+                                </div>
+                                <input class="btn btn-dark btn-lg" type="submit">
 
-                    </form>
-                    <hr>
-                    <div class="text-center">
-                        <p>Need an account? <a href="/signup">Sign Up</a></p>
-                        <p>Or go <a href="/">Home</a></p>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <p>Need an account? <a href="" data-toggle="modal" data-target="#myModal">Sign Up</a>
+                                </p>
+                                <p>Forgot your password? <a href="/forgot">Recover</a></p>
+                                <p>Or go <a href="/">Home</a></p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
             </div>
-        </div>
-    </div>
 </body>
 
 </html>
