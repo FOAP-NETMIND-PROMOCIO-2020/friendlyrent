@@ -38,7 +38,7 @@
     <%- include('partials/header'); %>
 
         <!-- END nav -->
-      <!-- <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+        <!-- <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
              <div class="container">
                 <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
@@ -53,7 +53,7 @@
             </div> 
         </section>  -->
 
-        
+
 
         <section class="ftco-section ftco-property-details">
             <div class="container">
@@ -100,15 +100,21 @@
                                         <%= apartment.title %>
                                     </h2>
                                     <h4><i class="fa fa-map fa-sm"></i> Address </h4>
-                                        <p class="text-muted"><%= apartment.location.address %></p>
-                                    
+                                    <p id="property-address" class="text-muted">
+                                        <%= apartment.location.address %>
+                                    </p>
+
                                     <h4><i class="fa fa-map-signs"></i> City </h4>
-                                        <p class="text-muted"><%= apartment.location.city %></p>
-                                    
+                                    <p id="property-city" class="text-muted">
+                                        <%= apartment.location.city %>
+                                    </p>
+
                                     <h4><i class="fa fa-globe"></i> Province </h4>
-                                        <p class="text-muted"><%= apartment.location.province %></p>
-                                        
-                                        <!-- <h4 data-latitude="<%# apartment.location.gps[0]%>" data-longitude="<%# apartment.location.gps[1]%>">
+                                    <p id="property-province" class="text-muted">
+                                        <%= apartment.location.province %>
+                                    </p>
+
+                                    <!-- <h4 data-latitude="<%# apartment.location.gps[0]%>" data-longitude="<%# apartment.location.gps[1]%>">
                                         </data-longitude>Location</h4>
                                         <h6> Latitude
                                         <%# apartment.location.gps[0]%> Longitude
@@ -118,7 +124,7 @@
                                         <a href="/new-booking/<%# apartment._id %>"><button class="btn btn-dark"
                                         type="button">Rent</button></a>
                                         <%# } %> -->
-                            </div>
+                                </div>
 
 
                                 <!-- Map api beginning-->
@@ -135,20 +141,49 @@
                                             zoomOffset: -1,
                                             accessToken: 'your.mapbox.access.token'
                                         }).addTo(mymap);
+
+                                        function addr_search() {
+                                            var address = document.getElementById("property-address").textContent;
+                                            var city = document.getElementById("property-city").textContent;
+                                            var province = document.getElementById("property-province").textContent;
+
+                                            let fullAddress = `${address} ${province} ${city}`;
+
+                                            console.info("HTML element", fullAddress);
+                                            var xmlhttp = new XMLHttpRequest();
+                                            var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + encodeURI(fullAddress);
+                                            console.info("URL OpenMap:", url);
+                                            xmlhttp.onreadystatechange = function() {
+                                                if (this.readyState == 4 && this.status == 200) {
+                                                    var myArr = JSON.parse(this.responseText);
+
+                                                    if (myArr.length > 0) {
+                                                        let latitude = myArr[0].lat;
+                                                        let longitude = myArr[0].lon;
+                                                        var marker = L.marker([latitude, longitude]).addTo(mymap);
+                                                        mymap.flyTo([latitude, longitude], 15);
+                                                    }
+                                                }
+                                            };
+                                            xmlhttp.open("GET", url, true);
+                                            xmlhttp.send();
+                                        }
+
+                                        addr_search();
                                     </script>
 
                                     <script defer>
-                                        if (document.querySelector('[data-latitude]')) {
-                                            let coordinates = document.querySelector("h4[data-latitude]").dataset
-                                            var latitude = coordinates.latitude;
-                                            var longitude = coordinates.longitude;
+                                        // if (document.querySelector('[data-latitude]')) {
+                                        //     let coordinates = document.querySelector("h4[data-latitude]").dataset
+                                        //     var latitude = coordinates.latitude;
+                                        //     var longitude = coordinates.longitude;
 
-                                            console.log(latitude + " " + longitude);
-                                            if (latitude && longitude) {
-                                                var marker = L.marker([latitude, longitude]).addTo(mymap);
-                                                mymap.flyTo([latitude, longitude], 15);
-                                            }
-                                        }
+                                        //     console.log(latitude + " " + longitude);
+                                        //     if (latitude && longitude) {
+                                        //         var marker = L.marker([latitude, longitude]).addTo(mymap);
+                                        //         mymap.flyTo([latitude, longitude], 15);
+                                        //     }
+                                        //  }
                                     </script>
 
 
@@ -194,20 +229,20 @@
                                             <li class=""><span class="fa fa-bath" aria-hidden="true"></span>
                                                 <%= apartment.bathrooms %>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                     <div class="col-md-2">
                                         <ul class="features">
                                             <% for (let i = 0; i< apartment.services.length; i++) { %>
                                                 <li class=""><span class="<%= apartment.services[i].iconService %>"></span>
-                                                     <%= apartment.services[i].codeService %>
-                                                        </li>
+                                                    <%= apartment.services[i].codeService %>
+                                                </li>
 
                                                 <%}	%>
                                         </ul>
                                     </div>
-                                    
+
                                     <div class="col-md-4" id="" role="" aria-labelledby="">
                                         <% if (apartment.description) { %>
                                             <h4>Description:</h4>
@@ -217,12 +252,12 @@
                                             <% } %>
                                     </div>
                                     <div class="col-md-4">
-                                                <% if (apartment.terms) { %>
-                                                    <h4>Terms: </h4>
-                                                    <p>
-                                                        <%=apartment.terms %>
-                                                    </p>
-                                                    <% } %>
+                                        <% if (apartment.terms) { %>
+                                            <h4>Terms: </h4>
+                                            <p>
+                                                <%=apartment.terms %>
+                                            </p>
+                                            <% } %>
                                     </div>
 
                                 </div>
@@ -238,7 +273,7 @@
                                                 <div class="desc">
                                                     <h4>
                                                         <span class="text-left"><%=apartment.comments[i].user_id.fullName%>
-												</span>
+                                                </span>
                                                         <span class="text-right"><%=apartment.comments[i].creationDate %></span>
                                                     </h4>
 
@@ -277,9 +312,9 @@
 
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-				stroke="#F96D00" /></svg></div>
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" /></svg></div>
 
 
         <script src="/js/jquery.min.js"></script>
