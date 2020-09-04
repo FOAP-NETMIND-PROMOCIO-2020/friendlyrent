@@ -13,6 +13,10 @@ Pàgina Web [FriendlyRent](https://sheltered-refuge-60050.herokuapp.com/)
 
 `npm install`
 
+### Tutorial 
+
+[Tutorial de la aplicación.](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/blob/master/doc/TutorialFriendlyRent.pdf)
+
 ## Construido con 🛠️
 
 * [Express](https://www.npmjs.com/package/express) - Framework NodeJS
