@@ -17,6 +17,10 @@ Pàgina Web [FriendlyRent](https://sheltered-refuge-60050.herokuapp.com/)
 
 [Tutorial de la aplicación.](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/blob/master/doc/TutorialFriendlyRent.pdf)
 
+### Plantilla utilizada y justificación
+
+[Plantilla Ecoverde](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/wiki/Selecci%C3%B3n-de-plantilla)
+
 ## Construido con 🛠️
 
 * [Express](https://www.npmjs.com/package/express) - Framework NodeJS
