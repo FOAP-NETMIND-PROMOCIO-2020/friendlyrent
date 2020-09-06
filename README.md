@@ -42,18 +42,18 @@ Puedes encontrar información de cómo hemos llevado a cabo este proyecto en [Wi
 
 El equipo que ha hecho posible este proyecto.
 
-* **Óscar Miras** - *Formador y project manager.Escribe los requisitos en servilletas!* - [omiras](https://omiras.github.io/) &#129497;&#127996;
-* **Fran Campos** - *Comediante de star trek, alias "chico python"* - [aplidinio](https://github.com/aplidinio) &#128013;
-* **Sergio Alocen** - *Entre dichos y hechos, transita el refranero especialista en base de datos* - [sagalto68](https://github.com/aplidinio) &#129337;&#127995;
-* **Isamel Garcia** - *Silencioso pero presente en el front-end* - [Ismiiiii](https://github.com/Ismiiiii) &#128586;
-* **Huiter Rodriguez** - *El ilusionista de AJAX -0.25pts* - [huiterjrv](https://github.com/huiterjrv) &#128585;;
-* **Larry Merino** - *El bello durmiente* - [LarryMerino](https://github.com/LarryMerino) &#128584;
-* **Horacio Miroddi** - *El guru de las artes programáticas* - [hmirodski](https://github.com/hmirodski) &#128302;
-* **Cecilia Mota** - *Optimista a buen paso, siempre pensando en el barranco* - [cecymota](https://github.com/cecymota) &#128591;&#127995;
-* **Laura Tamborero** - *Código 100% fitness* - [lauraDrums](https://github.com/lauraDrums) &#129336;&#127995;
-* **Raúl Garcia** - *Si se puede hacer más fácil, ¿por qué no?* - [rawl0408](https://github.com/rawl0408) &#129333;&#127995;
-* **José Calderon** - *Start debugger: "Creo que te faltó una coma"* - [kira14](https://github.com/kira14) &#128373;&#127995;
-* **Sergi Ortiz** - *Si algo puede salir mal, saldrá mal* - [SergiHub](https://github.com/SergiHub) &#128517;
-* **Jordi Targarona** - *Nadie lo ha visto en persona pero es de mucha ayuda* - [jorditarga](https://github.com/jorditarga) &#128187;
+* **Óscar Miras** - *Formador y project manager.Escribe los requisitos en servilletas!* - [omiras](https://omiras.github.io/) 🧙
+* **Fran Campos** - *Comediante de star trek, alias "chico python"* - [aplidinio](https://github.com/aplidinio) 🐍
+* **Sergio Alocen** - *Entre dichos y hechos, transita el refranero especialista en base de datos* - [sagalto68](https://github.com/aplidinio) 🤹🏻
+* **Isamel Garcia** - *Silencioso pero presente en el front-end* - [Ismiiiii](https://github.com/Ismiiiii) 🙊
+* **Huiter Rodriguez** - *El ilusionista de AJAX -0.25pts* - [huiterjrv](https://github.com/huiterjrv) 🙉
+* **Larry Merino** - *El bello durmiente* - [LarryMerino](https://github.com/LarryMerino) 🙈
+* **Horacio Miroddi** - *El guru de las artes programáticas* - [hmirodski](https://github.com/hmirodski) 🔮
+* **Cecilia Mota** - *Optimista a buen paso, siempre pensando en el barranco* - [cecymota](https://github.com/cecymota) 🙏🏻
+* **Laura Tamborero** - *Código 100% fitness* - [lauraDrums](https://github.com/lauraDrums) 🤸🏻
+* **Raúl Garcia** - *Si se puede hacer más fácil, ¿por qué no?* - [rawl0408](https://github.com/rawl0408) 🤵🏻
+* **José Calderon** - *Start debugger: "Creo que te faltó una coma"* - [kira14](https://github.com/kira14) 🕵🏻
+* **Sergi Ortiz** - *Si algo puede salir mal, saldrá mal* - [SergiHub](https://github.com/SergiHub) 😅
+* **Jordi Targarona** - *Nadie lo ha visto en persona pero es de mucha ayuda* - [jorditarga](https://github.com/jorditarga) 💻
 
 ---
