@@ -9,15 +9,15 @@ Aplicación Web para la gestión de alquileres entre inquilinos y propietarios.
 
 Pàgina Web [FriendlyRent](https://sheltered-refuge-60050.herokuapp.com/)
 
-### Instalación 🔧
+## Instalación 🔧
 
 `npm install`
 
-### Tutorial 
+## Tutorial 
 
 [Tutorial de la aplicación.](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/blob/master/doc/TutorialFriendlyRent.pdf)
 
-### Plantilla utilizada y justificación
+## Plantilla utilizada y justificación
 
 [Plantilla Ecoverde](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/wiki/Selecci%C3%B3n-de-plantilla)
 
@@ -32,6 +32,8 @@ Pàgina Web [FriendlyRent](https://sheltered-refuge-60050.herokuapp.com/)
 ![Esquema](https://user-images.githubusercontent.com/49642130/91548771-31196b80-e926-11ea-889d-3e9f2249c163.png)
 
 [Detalles de la arquitectura](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/wiki/Arquitectura-de-FriendlyRent)
+
+[Esquema de la base de datos inicial](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/wiki/Esquema-de-datos-de-la-aplicaci%C3%B3n)
 
 ## Wiki 📖
 
