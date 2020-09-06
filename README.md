@@ -29,6 +29,10 @@ Pàgina Web [FriendlyRent](https://sheltered-refuge-60050.herokuapp.com/)
 * Mongoose, ha servido para definir nuestra base de datos, puedes buscar más información [aquí](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/issues/54#issuecomment-670090510)
 * Puppeteer y Mocha, nos ha permitido realizar los test de la aplicación. Hemos definido nuestros tests basándonos en las siguientes [directivas](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/issues/59#issue-672995120)
 
+![Esquema](https://user-images.githubusercontent.com/49642130/91548771-31196b80-e926-11ea-889d-3e9f2249c163.png)
+
+[Detalles de la arquitectura](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/wiki/Arquitectura-de-FriendlyRent)
+
 ## Wiki 📖
 
 Puedes encontrar información de cómo hemos llevado a cabo este proyecto en [Wiki](https://github.com/FOAP-NETMIND-PROMOCIO-2020/friendlyrent/wiki)
