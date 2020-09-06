@@ -58,4 +58,6 @@ El equipo que ha hecho posible este proyecto.
 * **Sergi Ortiz** - *Si algo puede salir mal, saldrá mal* - [SergiHub](https://github.com/SergiHub) 😅
 * **Jordi Targarona** - *Nadie lo ha visto en persona pero es de mucha ayuda* - [jorditarga](https://github.com/jorditarga) 💻
 
+[Sección de equipo en la aplicación FriendlyRent](https://sheltered-refuge-60050.herokuapp.com/team)
+
 ---
